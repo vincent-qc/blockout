@@ -1,27 +1,32 @@
 package io.github.vincorqc.lockout.tasks;
 
 import io.github.vincorqc.lockout.util.TaskDifficulty;
-import io.github.vincorqc.lockout.util.TaskHelper;
+import io.github.vincorqc.lockout.util.ItemList;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+
+import java.util.Random;
 
 public class ObtainTask extends Task {
-    private Item item;
+    private final Item item;
 
-    public ObtainTask(TaskDifficulty difficulty, int id) {
-        super();
-        this.difficulty = difficulty;
+    public ObtainTask(TaskDifficulty difficulty) {
+        super(difficulty);
 
         // Assign Random Item
-        if(difficulty == TaskDifficulty.EASY) {
-            this.item = TaskHelper.EASY_ITEMS[id];
-        } else if(difficulty == TaskDifficulty.MEDIUM) {
-            this.item = TaskHelper.MEDIUM_ITEMS[id];
-        } else if(difficulty == TaskDifficulty.HARD) {
-            this.item = TaskHelper.HARD_ITEMS[id];
-        } else {
-            this.item = TaskHelper.EXPERT_ITEMS[id];
-        }
+        Random r = new Random();
+        if(difficulty == TaskDifficulty.EASY)
+            this.item = ItemList.EASY_ITEMS[r.nextInt(ItemList.EASY_ITEMS.length)];
+
+        else if(difficulty == TaskDifficulty.MEDIUM)
+            this.item = ItemList.MEDIUM_ITEMS[r.nextInt(ItemList.MEDIUM_ITEMS.length)];
+
+        else if(difficulty == TaskDifficulty.HARD)
+            this.item = ItemList.HARD_ITEMS[r.nextInt(ItemList.HARD_ITEMS.length)];
+
+        else
+            this.item = ItemList.EXPERT_ITEMS[r.nextInt(ItemList.EXPERT_ITEMS.length)];
+
+        title = "Obtain " + item.toString();
     }
 
     public Item getItem() {

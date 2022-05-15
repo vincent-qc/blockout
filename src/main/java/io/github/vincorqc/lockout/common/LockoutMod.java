@@ -1,6 +1,8 @@
 package io.github.vincorqc.lockout.common;
 
 import com.mojang.logging.LogUtils;
+import io.github.vincorqc.lockout.handlers.EventHandler;
+import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +45,8 @@ public class LockoutMod
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
+        LockoutGameHandler.generateGrid();
     }
 
 

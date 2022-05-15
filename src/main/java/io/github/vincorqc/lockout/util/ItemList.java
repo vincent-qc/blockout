@@ -3,7 +3,7 @@ package io.github.vincorqc.lockout.util;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class TaskHelper {
+public class ItemList {
     public static final Item[] EASY_ITEMS = {
             Items.APPLE,
             Items.BASALT,
