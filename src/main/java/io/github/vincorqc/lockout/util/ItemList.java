@@ -6,9 +6,7 @@ import net.minecraft.world.item.Items;
 public class ItemList {
     public static final Item[] EASY_ITEMS = {
             Items.APPLE,
-            Items.BASALT,
             Items.BEETROOT,
-            Items.BIG_DRIPLEAF,
             Items.BELL,
             Items.CAMPFIRE,
             Items.CAKE,
@@ -22,7 +20,6 @@ public class ItemList {
             Items.GHAST_TEAR,
             Items.GLOW_BERRIES,
             Items.GRINDSTONE,
-            Items.HAY_BLOCK,
             Items.HONEYCOMB_BLOCK,
             Items.IRON_BARS,
             Items.JACK_O_LANTERN,
@@ -43,12 +40,14 @@ public class ItemList {
             Items.SCAFFOLDING,
             Items.SMOKER,
             Items.VINE,
-            Items.WARPED_FUNGUS_ON_A_STICK
+            Items.WARPED_FUNGUS_ON_A_STICK,
+            Items.RED_GLAZED_TERRACOTTA,
+            Items.BLUE_GLAZED_TERRACOTTA,
+            Items.PURPLE_GLAZED_TERRACOTTA,
+            Items.LIME_GLAZED_TERRACOTTA
     };
 
     public static final Item[] MEDIUM_ITEMS = {
-            Items.AMETHYST_BLOCK,
-            Items.ANVIL,
             Items.BEE_NEST,
             Items.COCOA_BEANS,
             Items.DIAMOND_ORE,
@@ -70,7 +69,6 @@ public class ItemList {
             Items.AXOLOTL_BUCKET,
             Items.WITHER_SKELETON_SKULL,
             Items.SKULL_BANNER_PATTERN,
-            Items.ANCIENT_DEBRIS,
             Items.NETHERITE_INGOT,
             Items.LODESTONE,
             Items.SCUTE,
@@ -82,7 +80,6 @@ public class ItemList {
     public static final Item[] EXPERT_ITEMS = {
             Items.ELYTRA,
             Items.DRAGON_HEAD,
-            Items.HEART_OF_THE_SEA,
-            Items.NETHER_STAR
+            Items.MYCELIUM
     };
 }

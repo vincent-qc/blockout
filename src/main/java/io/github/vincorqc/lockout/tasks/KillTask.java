@@ -15,17 +15,18 @@ public class KillTask extends Task {
         // Assign Random Advancement
         Random r = new Random();
         if(difficulty == TaskDifficulty.EASY)
-            this.mob = MobList.EASY_MOBS[MobList.EASY_MOBS.length];
+            this.mob = MobList.EASY_MOBS[r.nextInt(MobList.EASY_MOBS.length)];
 
         else if(difficulty == TaskDifficulty.MEDIUM)
-            this.mob = MobList.MEDIUM_MOBS[MobList.MEDIUM_MOBS.length];
+            this.mob = MobList.MEDIUM_MOBS[r.nextInt(MobList.MEDIUM_MOBS.length)];
 
         else if(difficulty == TaskDifficulty.HARD)
-            this.mob = MobList.HARD_MOBS[MobList.HARD_MOBS.length];
+            this.mob = MobList.HARD_MOBS[r.nextInt(MobList.HARD_MOBS.length)];
 
         else
-            this.mob = MobList.EXPERT_MOBS[MobList.EXPERT_MOBS.length];
+            this.mob = MobList.EXPERT_MOBS[r.nextInt(MobList.EXPERT_MOBS.length)];
 
+        title = "Kill a " + mob;
     }
 
     public String getMob() {

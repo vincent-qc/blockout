@@ -22,9 +22,10 @@ public class EffectTask extends Task {
         else
             this.effect = EffectList.MEDIUM_EFFECTS[r.nextInt(EffectList.MEDIUM_EFFECTS.length)];
 
+        title = "Obtain " + effect.getDisplayName().getString() + " effect";
     }
 
-    public MobEffect getItem() {
+    public MobEffect getEffect() {
         return effect;
     }
 }

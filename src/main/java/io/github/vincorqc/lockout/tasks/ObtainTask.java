@@ -3,6 +3,7 @@ package io.github.vincorqc.lockout.tasks;
 import io.github.vincorqc.lockout.util.TaskDifficulty;
 import io.github.vincorqc.lockout.util.ItemList;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Random;
 
@@ -27,6 +28,11 @@ public class ObtainTask extends Task {
             this.item = ItemList.EXPERT_ITEMS[r.nextInt(ItemList.EXPERT_ITEMS.length)];
 
         title = "Obtain " + item.toString();
+    }
+
+    @Override
+    public ItemStack getItemIcon() {
+        return new ItemStack(item);
     }
 
     public Item getItem() {

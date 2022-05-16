@@ -22,7 +22,6 @@ public class AdvancementList {
             "charge_respawn_anchor",
             "ride_strider",
             "return_to_sender",
-            "spyglass_at_parrot",
             "spyglass_at_ghast",
             "walk_on_powder_snow_with_leather_boots"
     };
@@ -33,7 +32,8 @@ public class AdvancementList {
             "levitate",
             "obtain_netherite_hoe",
             "silk_touch_nest",
-            "use_lodestone"
+            "use_lodestone",
+            "spyglass_at_parrot",
     };
 
     public static final String[] EXPERT_ADVANCEMENTS = {

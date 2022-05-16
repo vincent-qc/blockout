@@ -46,8 +46,7 @@ public class MobList {
 
     public static final String[] EXPERT_MOBS = {
             "Zoglin",
-            "Wither",
             "Ravager",
-            "Elder Guardian"
+            "Vex"
     };
 }

@@ -1,10 +1,15 @@
 package io.github.vincorqc.lockout.common;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import io.github.vincorqc.lockout.handlers.EventHandler;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,12 +23,15 @@ import org.slf4j.Logger;
 
 import java.util.stream.Collectors;
 
+import static com.mojang.blaze3d.platform.InputConstants.Type.KEYSYM;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("lockout")
 public class LockoutMod
 {
-    // Directly reference a slf4j logger
+    public static final String MODID = "lockout";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final KeyMapping key = new KeyMapping("key.lockout.opengui", InputConstants.KEY_BACKSLASH, "key.categories.ui" );
 
     public LockoutMod()
     {
@@ -38,6 +46,8 @@ public class LockoutMod
         MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.register(new EventHandler());
+
+        ClientRegistry.registerKeyBinding(key);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -47,6 +57,7 @@ public class LockoutMod
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
         LockoutGameHandler.generateGrid();
+
     }
 
 
@@ -83,10 +94,9 @@ public class LockoutMod
     public static class RegistryEvents
     {
         @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
+        public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
         {
-            // Register a new block here
-            LOGGER.info("HELLO from Register Block");
+
         }
     }
 }

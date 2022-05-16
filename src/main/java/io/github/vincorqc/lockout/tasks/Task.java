@@ -3,8 +3,13 @@ package io.github.vincorqc.lockout.tasks;
 import io.github.vincorqc.lockout.handlers.TeamHandler;
 import io.github.vincorqc.lockout.util.TaskDifficulty;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class Task {
     protected TaskDifficulty difficulty;
@@ -18,7 +23,11 @@ public class Task {
     public void complete(Player p) {
         if(team == -1) {
             team = TeamHandler.getTeam(p);
-            Minecraft.getInstance().player.sendMessage(new TextComponent(p.getName().getString() + " COMPLETED: " + title), p.getUUID());
+            try {
+                Minecraft.getInstance().player.sendMessage(new TextComponent(p.getName().getString() + " COMPLETED: " + title), p.getUUID());
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
         }
     }
 
@@ -28,5 +37,13 @@ public class Task {
 
     public int getTeam() {
         return team;
+    }
+
+    public ItemStack getItemIcon() {
+        return null;
+    }
+
+    public ResourceLocation getResourceIcon() {
+        return null;
     }
 }
