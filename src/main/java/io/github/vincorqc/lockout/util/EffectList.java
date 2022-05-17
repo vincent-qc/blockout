@@ -1,6 +1,7 @@
 package io.github.vincorqc.lockout.util;
 
 import com.mojang.blaze3d.shaders.Effect;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
@@ -26,5 +27,25 @@ public class EffectList {
             MobEffects.BLINDNESS,
             MobEffects.CONFUSION,
             MobEffects.DAMAGE_RESISTANCE
+    };
+
+    public static final Item[] EASY_ICONS = {
+            Items.RABBIT_FOOT,
+            Items.SUGAR,
+            Items.ENDER_EYE,
+            Items.SPIDER_EYE,
+            Items.WITHER_ROSE,
+            Items.BLAZE_POWDER,
+            Items.FERMENTED_SPIDER_EYE,
+            Items.HEART_OF_THE_SEA,
+            Items.MAGMA_CREAM
+    };
+
+    public static final Item[] MEDIUM_ICONS = {
+            Items.GOLDEN_APPLE,
+            Items.GLOWSTONE_DUST,
+            Items.ENDER_PEARL,
+            Items.PUFFERFISH,
+            Items.TURTLE_HELMET
     };
 }

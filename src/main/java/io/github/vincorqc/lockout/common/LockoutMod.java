@@ -4,9 +4,12 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import io.github.vincorqc.lockout.handlers.EventHandler;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
+import io.github.vincorqc.lockout.util.DamageList;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.KeyboardInput;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.ClientRegistry;
@@ -32,9 +35,11 @@ public class LockoutMod
     public static final String MODID = "lockout";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final KeyMapping key = new KeyMapping("key.lockout.opengui", InputConstants.KEY_BACKSLASH, "key.categories.ui" );
+    public static MinecraftServer server;
 
     public LockoutMod()
     {
+
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -86,6 +91,7 @@ public class LockoutMod
     {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+        server = event.getServer();
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

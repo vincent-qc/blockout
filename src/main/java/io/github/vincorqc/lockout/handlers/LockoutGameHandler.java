@@ -1,6 +1,7 @@
 package io.github.vincorqc.lockout.handlers;
 
 import io.github.vincorqc.lockout.tasks.*;
+import io.github.vincorqc.lockout.util.OpponentList;
 import io.github.vincorqc.lockout.util.TaskDifficulty;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,8 @@ public class LockoutGameHandler {
     protected static final ArrayList<MineTask> mineTasks = new ArrayList<>();
     protected static final ArrayList<DeathTask> deathTasks = new ArrayList<>();
     protected static final ArrayList<CollectTask> collectTasks = new ArrayList<>();
+    protected static final ArrayList<ExperienceTask> experienceTasks = new ArrayList<>();
+    protected static final ArrayList<OpponentTask> opponentTasks = new ArrayList<>();
 
     private static final ArrayList<String> usedTasks = new ArrayList<>();
 
@@ -51,7 +54,7 @@ public class LockoutGameHandler {
         Random r = new Random();
         int diff = r.nextInt(100);
 
-        if(diff < 35) {
+        if(diff < 25) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.EASY;
 
@@ -62,26 +65,30 @@ public class LockoutGameHandler {
             else if(type < 85) t = new MineTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < 80) {
+        } else if(diff < 60) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.MEDIUM;
 
-            if(type < 20) t = new AdvancementTask(d);
-            else if(type < 35) t = new ObtainTask(d);
-            else if(type < 55) t = new KillTask(d);
-            else if(type < 65) t = new EffectTask(d);
-            else if(type < 80) t = new MineTask(d);
+            if(type < 15) t = new AdvancementTask(d);
+            else if(type < 28) t = new ObtainTask(d);
+            else if(type < 45) t = new KillTask(d);
+            else if(type < 60) t = new EffectTask(d);
+            else if(type < 75) t = new MineTask(d);
+            else if(type < 83) t = new OpponentTask(d);
+            else if(type < 85) t = new ExperienceTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < 94) {
+        } else if(diff < 90) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.HARD;
 
-            if(type < 30) t = new AdvancementTask(d);
-            else if(type < 40) t = new ObtainTask(d);
-            else if(type < 50) t = new KillTask(d);
-            else if(type < 70) t = new CollectTask(d);
-            else if(type < 74) t = new MineTask(d);
+            if(type < 15) t = new AdvancementTask(d);
+            else if(type < 25) t = new ObtainTask(d);
+            else if(type < 35) t = new KillTask(d);
+            else if(type < 50) t = new CollectTask(d);
+            else if(type < 58) t = new MineTask(d);
+            else if(type < 82) t = new OpponentTask(d);
+            else if(type < 85) t = new ExperienceTask(d);
             else if(type < 100) t = new DeathTask(d);
 
         } else {
@@ -99,12 +106,14 @@ public class LockoutGameHandler {
 
     private static void addToLists(Task t) {
         if(t instanceof ObtainTask) obtainTasks.add((ObtainTask) t);
-        if(t instanceof AdvancementTask) advancementTasks.add((AdvancementTask) t);
-        if(t instanceof KillTask) killTasks.add((KillTask) t);
-        if(t instanceof EffectTask) effectTasks.add((EffectTask) t);
-        if(t instanceof MineTask) mineTasks.add((MineTask) t);
-        if(t instanceof DeathTask) deathTasks.add((DeathTask) t);
-        if(t instanceof CollectTask) collectTasks.add((CollectTask) t);
+        else if(t instanceof AdvancementTask) advancementTasks.add((AdvancementTask) t);
+        else if(t instanceof KillTask) killTasks.add((KillTask) t);
+        else if(t instanceof EffectTask) effectTasks.add((EffectTask) t);
+        else if(t instanceof MineTask) mineTasks.add((MineTask) t);
+        else if(t instanceof DeathTask) deathTasks.add((DeathTask) t);
+        else if(t instanceof CollectTask) collectTasks.add((CollectTask) t);
+        else if(t instanceof ExperienceTask) experienceTasks.add((ExperienceTask) t);
+        else if(t instanceof OpponentTask) opponentTasks.add((OpponentTask) t);
     }
 
     public static String asString() {

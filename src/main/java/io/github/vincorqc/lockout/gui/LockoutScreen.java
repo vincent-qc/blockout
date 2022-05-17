@@ -5,21 +5,35 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
+import io.github.vincorqc.lockout.handlers.TeamHandler;
+import io.github.vincorqc.lockout.tasks.AdvancementTask;
+import io.github.vincorqc.lockout.tasks.DeathTask;
 import io.github.vincorqc.lockout.tasks.Task;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.font.FontManager;
+import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.screens.PopupScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.client.gui.GuiUtils;
+
+import java.util.HashMap;
 
 public class LockoutScreen extends Screen {
 
@@ -29,13 +43,11 @@ public class LockoutScreen extends Screen {
 
     public LockoutScreen(Component p_96550_) {
         super(p_96550_);
-        assert Minecraft.getInstance().screen != null;
-
     }
 
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float p_96565_) {
+    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(stack, 0);
 
         Task[][] grid = LockoutGameHandler.grid;
@@ -48,8 +60,6 @@ public class LockoutScreen extends Screen {
 
                 if(t.getItemIcon() != null) {
                     Minecraft.getInstance().getItemRenderer().renderGuiItem(t.getItemIcon(), gridX, gridY);
-                } else {
-                    Minecraft.getInstance().getItemRenderer().renderGuiItem(new ItemStack(Blocks.BARRIER.asItem()), gridX, gridY);
                 }
 
                 if(isMouseOver(mouseX, mouseY, gridX, gridY, 18, 18)) {
@@ -65,6 +75,9 @@ public class LockoutScreen extends Screen {
 
     @Override
     public void renderBackground(PoseStack stack, int p_96560_) {
+        assert Minecraft.getInstance().screen != null;
+        fill(stack, 0, 0, Minecraft.getInstance().screen.width, Minecraft.getInstance().screen.height, 0x80000000);
+
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, GUI);
@@ -84,10 +97,18 @@ public class LockoutScreen extends Screen {
                 int gridY = yPos + 24 + (18 * r);
                 Task t = grid[r][c];
 
-                if(t.getTeam() == 0) fill(stack, gridX, gridY, gridX + 16, gridY + 16, 0xD0FF0000);
-                else if(t.getTeam() == 1) fill(stack, gridX, gridY, gridX + 16, gridY + 16, 0xD00000F0);
+                if(t.getTeam() == 1) fill(stack, gridX, gridY, gridX + 16, gridY + 16, 0x50FF0000);
+                else if(t.getTeam() == 2) fill(stack, gridX, gridY, gridX + 16, gridY + 16, 0x500000FF);
             }
         }
+
+        String fTOneScore = TeamHandler.getScore(1) < 10 ? "0" + TeamHandler.getScore(1): String.valueOf(TeamHandler.getScore(1));
+        String fTTwoScore = TeamHandler.getScore(2) < 10 ? "0" + TeamHandler.getScore(2): String.valueOf(TeamHandler.getScore(2));
+
+
+        drawCenteredString(stack, font, fTOneScore, xPos + (52 - 15), yPos + 10, 0xF07070);
+        drawCenteredString(stack, font, "-", xPos + 52, yPos + 10, 0xFFFFFF);
+        drawCenteredString(stack, font, fTTwoScore, xPos + (52 + 15), yPos + 10, 0x70B0F0);
     }
 
 

@@ -30,6 +30,11 @@ public class TeamHandler {
         if(teamScores.containsKey(team)) teamScores.replace(team, teamScores.get(team) + 1);
     }
 
+    public static int getScore(int team) {
+        if(teamScores.containsKey(team)) return teamScores.get(team);
+        return 0;
+    }
+
     public static void saveTeamData() {
 
     }

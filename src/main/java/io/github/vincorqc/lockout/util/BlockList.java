@@ -20,7 +20,6 @@ public class BlockList {
 
     public static final Block[] MEDIUM_BLOCKS = {
             Blocks.DEAD_BUSH,
-            Blocks.SPAWNER,
             Blocks.DIRT_PATH,
             Blocks.FERN,
             Blocks.SEA_PICKLE,
@@ -28,7 +27,8 @@ public class BlockList {
     };
 
     public static final Block[] HARD_BLOCKS = {
-            Blocks.SPONGE,
             Blocks.END_ROD,
+            Blocks.SPAWNER,
+            Blocks.TURTLE_EGG
     };
 }

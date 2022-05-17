@@ -73,6 +73,7 @@ public class EventHandler {
         if(!event.player.getInventory().isEmpty()) {
             VerificationHandler.validateObtain(event.player);
             VerificationHandler.validateCollect(event.player);
+            VerificationHandler.validateOpponent(event.player);
         }
 
         if(!event.player.getActiveEffects().isEmpty()) VerificationHandler.validateEffect(event.player);
@@ -82,6 +83,13 @@ public class EventHandler {
     public void mine(BlockEvent.BreakEvent event) {
         System.out.println("PLAYER " + event.getPlayer().getName().getString() + " MINED " + event.getState().getBlock().getName().getString());
         VerificationHandler.validateMine(event.getPlayer(), event.getState().getBlock());
+    }
+
+    @SubscribeEvent
+    public void experience(PlayerXpEvent.XpChange event) {
+        if(event.getPlayer().experienceLevel > 19) {
+            VerificationHandler.validateExperience(event.getPlayer(), event.getPlayer().experienceLevel);
+        }
     }
 
 

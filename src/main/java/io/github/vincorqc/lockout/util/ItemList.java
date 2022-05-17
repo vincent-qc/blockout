@@ -71,7 +71,6 @@ public class ItemList {
             Items.SKULL_BANNER_PATTERN,
             Items.NETHERITE_INGOT,
             Items.LODESTONE,
-            Items.SCUTE,
             Items.NAME_TAG,
             Items.DRAGON_BREATH,
             Items.END_CRYSTAL
@@ -79,7 +78,8 @@ public class ItemList {
 
     public static final Item[] EXPERT_ITEMS = {
             Items.ELYTRA,
-            Items.DRAGON_HEAD,
-            Items.MYCELIUM
+            Items.MYCELIUM,
+            Items.SPONGE,
+            Items.TURTLE_HELMET
     };
 }

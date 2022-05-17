@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.scores.Team;
 
 public class VerificationHandler extends LockoutGameHandler {
     public static void validateObtain(Player p) {
@@ -94,6 +95,30 @@ public class VerificationHandler extends LockoutGameHandler {
             if(complete) {
                 task.complete(p);
                 collectTasks.remove(task);
+                i--;
+            }
+        }
+    }
+
+    public static void validateExperience(Player p, int level) {
+        for(int i = 0; i < experienceTasks.size(); i++) {
+            ExperienceTask task = experienceTasks.get(i);
+
+            if(level >= task.getLevel()) {
+                task.complete(p);
+                experienceTasks.remove(task);
+                i--;
+            }
+        }
+    }
+
+    public static void validateOpponent(Player p) {
+        for(int i = 0; i < opponentTasks.size(); i++) {
+            OpponentTask task = opponentTasks.get(i);
+            if(p.getInventory().contains(new ItemStack(task.getItem()))) {
+                int t = TeamHandler.getTeam(p) == 1 ? 2 : 1;
+                task.complete(t);
+                opponentTasks.remove(task);
                 i--;
             }
         }

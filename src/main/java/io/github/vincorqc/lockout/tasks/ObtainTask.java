@@ -27,7 +27,7 @@ public class ObtainTask extends Task {
         else
             this.item = ItemList.EXPERT_ITEMS[r.nextInt(ItemList.EXPERT_ITEMS.length)];
 
-        title = "Obtain " + item.toString();
+        title = "Obtain " + new ItemStack(item).getHoverName().getString();
     }
 
     @Override
