@@ -22,6 +22,17 @@ public class ExperienceTask extends Task {
         title = "Reach level +" + this.level;
     }
 
+    public ExperienceTask(String difficulty) {
+        super(difficulty);
+
+        if(difficulty.equals("easy"))
+            level = 20;
+        else
+            level = 30;
+
+        title = "Reach level +" + this.level;
+    }
+
     public int getLevel() {
         return level;
     }

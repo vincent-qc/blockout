@@ -1,5 +1,11 @@
 package io.github.vincorqc.lockout.handlers;
 
+import io.github.vincorqc.lockout.common.LockoutMod;
+import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
+import io.github.vincorqc.lockout.networking.packets.TeamPacket;
+import io.github.vincorqc.lockout.networking.packets.TeamScorePacket;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
@@ -17,8 +23,13 @@ public class TeamHandler {
     }
 
     public static void setTeam(Player p, int team) {
-        if(playerTeams.containsKey(p.getName().getString())) playerTeams.replace(p.getName().getString(), team);
+        if(playerTeams.containsKey(p.getName().getString())) {
+            playerTeams.replace(p.getName().getString(), team);
+        } else {
+            addPlayer(p);
+        }
 
+        if(team == -1) return;
         if(!teamScores.containsKey(team)) teamScores.put(team, 0);
     }
 
@@ -27,7 +38,17 @@ public class TeamHandler {
     }
 
     public static void incrementScore(int team) {
-        if(teamScores.containsKey(team)) teamScores.replace(team, teamScores.get(team) + 1);
+        if(teamScores.containsKey(team)) {
+            teamScores.replace(team, teamScores.get(team) + 1);
+            if(teamScores.get(team) > 12) {
+                LockoutGameHandler.setGameStarted(false);
+                TextComponent text = new TextComponent("Team " + team + " won!");
+
+                for(Player p : LockoutMod.server.getPlayerList().getPlayers()) {
+                    LockoutMod.server.getPlayerList().broadcastMessage(text, ChatType.SYSTEM, p.getUUID());
+                }
+            }
+        }
     }
 
     public static int getScore(int team) {
@@ -35,11 +56,19 @@ public class TeamHandler {
         return 0;
     }
 
-    public static void saveTeamData() {
-
+    public static void setScore(int team, int score) {
+        teamScores.put(team, score);
     }
 
-    public static void readTeamData() {
+    public static void syncTeamData() {
+        for(String name : playerTeams.keySet()) {
+            LockoutPacketHandler.sendAll(new TeamPacket(name, playerTeams.get(name)));
+        }
+    }
 
+    public static void syncTeamScores() {
+        for(int team : teamScores.keySet()) {
+            if(teamScores.containsKey(team)) LockoutPacketHandler.sendAll(new TeamScorePacket(team, teamScores.get(team)));
+        }
     }
 }

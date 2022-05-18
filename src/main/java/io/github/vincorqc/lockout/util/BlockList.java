@@ -29,6 +29,7 @@ public class BlockList {
     public static final Block[] HARD_BLOCKS = {
             Blocks.END_ROD,
             Blocks.SPAWNER,
-            Blocks.TURTLE_EGG
+            Blocks.TURTLE_EGG,
+            Blocks.SPONGE
     };
 }

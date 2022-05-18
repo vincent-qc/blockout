@@ -4,7 +4,9 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import io.github.vincorqc.lockout.handlers.EventHandler;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
+import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import io.github.vincorqc.lockout.util.DamageList;
+import io.github.vincorqc.lockout.util.Keybinds;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.KeyboardInput;
@@ -17,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -34,7 +37,7 @@ public class LockoutMod
 {
     public static final String MODID = "lockout";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static final KeyMapping key = new KeyMapping("key.lockout.opengui", InputConstants.KEY_BACKSLASH, "key.categories.ui" );
+
     public static MinecraftServer server;
 
     public LockoutMod()
@@ -52,7 +55,7 @@ public class LockoutMod
 
         MinecraftForge.EVENT_BUS.register(new EventHandler());
 
-        ClientRegistry.registerKeyBinding(key);
+
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -60,6 +63,10 @@ public class LockoutMod
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
+        LockoutGameHandler.setGameStarted(true);
+
+        LockoutPacketHandler.register();
 
         LockoutGameHandler.generateGrid();
 
@@ -70,7 +77,7 @@ public class LockoutMod
 
 
 
-
+    // Irrelevant but im too scared to remove since the forge docs are sus
 
     private void enqueueIMC(final InterModEnqueueEvent event)
     {

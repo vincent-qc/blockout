@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class OpponentTask extends Task {
@@ -18,13 +19,30 @@ public class OpponentTask extends Task {
 
         // Assign Random Item
         Random r = new Random();
-        if(difficulty == TaskDifficulty.MEDIUM)
-            this.item = OpponentList.MEDIUM_ITEMS[r.nextInt(OpponentList.MEDIUM_ITEMS.length)];
+        if(difficulty == TaskDifficulty.MEDIUM) {
+            index = r.nextInt(OpponentList.MEDIUM_ITEMS.length);
+            this.item = OpponentList.MEDIUM_ITEMS[index];
+        } else {
+            index = r.nextInt(OpponentList.HARD_ITEMS.length);
+            this.item = OpponentList.HARD_ITEMS[index];
+        }
 
-        else
-            this.item = OpponentList.HARD_ITEMS[r.nextInt(OpponentList.HARD_ITEMS.length)];
+        title = "Opponent obtains " + new ItemStack(item).getHoverName().getString();
+    }
 
-        title = "Opponent obtains " + item.toString();
+    public OpponentTask(String difficulty, int index) {
+        super(difficulty);
+        this.index = index;
+
+        if(difficulty.equals("medium")) {
+            this.item = OpponentList.MEDIUM_ITEMS[index];
+            this.difficulty = TaskDifficulty.MEDIUM;
+        } else {
+            this.item = OpponentList.HARD_ITEMS[index];
+            this.difficulty = TaskDifficulty.HARD;
+        }
+
+        title = "Opponent obtains " + new ItemStack(item).getHoverName().getString();
     }
 
     @Override
@@ -36,8 +54,4 @@ public class OpponentTask extends Task {
         return item;
     }
 
-    @Override
-    public ResourceLocation getIdentifier() {
-        return new ResourceLocation(LockoutMod.MODID, "textures/tasks/identifiers/opponent.png");
-    }
 }

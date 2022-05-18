@@ -20,15 +20,32 @@ public class CollectTask extends Task {
         // Assign Random Item
         Random r = new Random();
         if (difficulty == TaskDifficulty.HARD) {
-            int index = r.nextInt(CollectList.HARD_COLLECT.length);
+            index = r.nextInt(CollectList.HARD_COLLECT.length);
             this.collection = CollectList.HARD_COLLECT[index];
             title = CollectList.HARD_TITLES[index];
         } else {
-            int index = r.nextInt(CollectList.EXPERT_COLLECT.length);
+            index = r.nextInt(CollectList.EXPERT_COLLECT.length);
             this.collection = CollectList.EXPERT_COLLECT[index];
             title = CollectList.EXPERT_TITLES[index];
         }
     }
+
+    public CollectTask(String difficulty, int index) {
+        super(difficulty);
+        this.index = index;
+
+        if(difficulty.equals("hard")) {
+            this.collection = CollectList.HARD_COLLECT[index];
+            this.difficulty = TaskDifficulty.HARD;
+            title = CollectList.HARD_TITLES[index];
+        } else {
+            this.collection = CollectList.EXPERT_COLLECT[index];
+            this.difficulty = TaskDifficulty.EXPERT;
+            title = CollectList.EXPERT_TITLES[index];
+        }
+    }
+
+
 
     public ItemStack getItemIcon() {
         return new ItemStack(collection[0]);
@@ -38,8 +55,4 @@ public class CollectTask extends Task {
         return collection;
     }
 
-    @Override
-    public ResourceLocation getIdentifier() {
-        return new ResourceLocation(LockoutMod.MODID, "textures/tasks/identifiers/collect.png");
-    }
 }

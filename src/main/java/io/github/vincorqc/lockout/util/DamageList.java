@@ -56,4 +56,27 @@ public class DamageList {
             Items.END_PORTAL_FRAME,
             Items.DRAGON_BREATH
     };
+
+    public static String[] EASY_TITLES = {
+            "Burn to death",
+            "Drown to death",
+            "Die by magma block",
+            "Swim in lava",
+            "Get pricked to death by sweetberries",
+            "Suffocate to death",
+    };
+
+    public static String[] MEDIUM_TITLES = {
+            "Die from falling anvil",
+            "Die from falling Stalactite",
+            "Die from magic",
+            "Die from wither effect",
+            "Starve to death",
+    };
+
+    public static String[] HARD_TITLES = {
+            "Die from entity cramming",
+            "Jump into the void",
+            "Die from dragon's breath"
+    };
 }

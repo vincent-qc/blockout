@@ -2,21 +2,25 @@ package io.github.vincorqc.lockout.handlers;
 
 import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.gui.LockoutScreen;
+import io.github.vincorqc.lockout.util.Keybinds;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.controls.KeyBindsList;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDestroyBlockEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.concurrent.locks.Lock;
 
 public class EventHandler {
+
 
     /**
      * Validates AdvancementTasks
@@ -36,6 +40,7 @@ public class EventHandler {
     public void use(LivingEntityUseItemEvent.Finish event) {
         if(event.getEntity() instanceof Player) {
             Player p = (Player) event.getEntity();
+
 
             System.out.println("USED ITEM: " + event.getItem().getDisplayName().getString() + " BY: " + p.getName().getString());
         }
@@ -99,17 +104,40 @@ public class EventHandler {
      * @param event Activates when a player joins the world
      */
     @SubscribeEvent
+    @OnlyIn(Dist.DEDICATED_SERVER)
     public void playerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         System.out.println("\n\n\n" + "JOINED ID: " + event.getPlayer().getName().getString());
 
         TeamHandler.addPlayer(event.getPlayer());
         TeamHandler.setTeam(event.getPlayer(), 1);
+
+        LockoutGameHandler.syncTasks();
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public void openLockoutGUI(TickEvent.ClientTickEvent event) {
-        if(LockoutMod.key.isDown()) {
+        if(Keybinds.key.isDown()) {
+
             Minecraft.getInstance().setScreen(new LockoutScreen(new TextComponent("Blockout")));
+        }
+    }
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void registerKeyBindings(FMLClientSetupEvent event) {
+        Keybinds.register();
+    }
+
+    private static int tick = 0;
+    @SubscribeEvent
+    @OnlyIn(Dist.DEDICATED_SERVER)
+    public void serverTick(TickEvent.ServerTickEvent event) {
+        tick++;
+
+        if(tick >= 2000) {
+            tick = 0;
+            LockoutGameHandler.syncTasks();
         }
     }
 }

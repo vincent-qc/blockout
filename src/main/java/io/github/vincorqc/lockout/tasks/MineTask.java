@@ -18,15 +18,34 @@ public class MineTask extends Task {
 
         // Assign Random Advancement
         Random r = new Random();
-        if(difficulty == TaskDifficulty.EASY)
-            this.block = BlockList.EASY_BLOCKS[r.nextInt(BlockList.EASY_BLOCKS.length)];
+        if(difficulty == TaskDifficulty.EASY) {
+            index = r.nextInt(BlockList.EASY_BLOCKS.length);
+            this.block = BlockList.EASY_BLOCKS[index];
+        } else if(difficulty == TaskDifficulty.MEDIUM) {
+            this.index = r.nextInt(BlockList.MEDIUM_BLOCKS.length);
+            this.block = BlockList.MEDIUM_BLOCKS[index];
+        } else {
+            index = r.nextInt(BlockList.HARD_BLOCKS.length);
+            this.block = BlockList.HARD_BLOCKS[index];
+        }
 
-        else if(difficulty == TaskDifficulty.MEDIUM)
-            this.block = BlockList.MEDIUM_BLOCKS[r.nextInt(BlockList.MEDIUM_BLOCKS.length)];
+        title = "Mine " + block.getName().getString();
+    }
 
-        else
-            this.block = BlockList.HARD_BLOCKS[r.nextInt(BlockList.HARD_BLOCKS.length)];
+    public MineTask(String difficulty, int index) {
+        super(difficulty);
+        this.index = index;
 
+        if(difficulty.equals("easy")) {
+            this.block = BlockList.EASY_BLOCKS[index];
+            this.difficulty = TaskDifficulty.EASY;
+        } else if(difficulty.equals("medium")) {
+            this.block = BlockList.MEDIUM_BLOCKS[index];
+            this.difficulty = TaskDifficulty.MEDIUM;
+        } else {
+            this.block = BlockList.HARD_BLOCKS[index];
+            this.difficulty = TaskDifficulty.HARD;
+        }
 
         title = "Mine " + block.getName().getString();
     }
@@ -40,8 +59,4 @@ public class MineTask extends Task {
         return block;
     }
 
-    @Override
-    public ResourceLocation getIdentifier() {
-        return new ResourceLocation(LockoutMod.MODID, "textures/tasks/identifiers/mine.png");
-    }
 }

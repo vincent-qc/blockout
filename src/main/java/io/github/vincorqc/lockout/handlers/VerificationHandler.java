@@ -1,5 +1,6 @@
 package io.github.vincorqc.lockout.handlers;
 
+import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.tasks.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -116,10 +117,14 @@ public class VerificationHandler extends LockoutGameHandler {
         for(int i = 0; i < opponentTasks.size(); i++) {
             OpponentTask task = opponentTasks.get(i);
             if(p.getInventory().contains(new ItemStack(task.getItem()))) {
-                int t = TeamHandler.getTeam(p) == 1 ? 2 : 1;
-                task.complete(t);
-                opponentTasks.remove(task);
-                i--;
+                try {
+                    int t = TeamHandler.getTeam(p) == 1 ? 2 : 1;
+                    task.complete(t);
+                    opponentTasks.remove(task);
+                    i--;
+                } catch (Exception e) {
+                    LockoutMod.LOGGER.info(String.valueOf(e));
+                }
             }
         }
     }

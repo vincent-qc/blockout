@@ -84,4 +84,43 @@ public class AdvancementList {
             Items.FILLED_MAP,
             Items.DRAGON_EGG
     };
+
+    public static final String[] EASY_TITLES = {
+            "Plant a seed",
+            "Summon an iron golem",
+            "Breed an animal",
+            "Slide on a honey block",
+            "Tame an animal",
+            "Make a sign glow",
+            "Fish with a bucket",
+            "Unwax a waxed copper block",
+            "Use a shield"
+    };
+
+    public static final String[] MEDIUM_TITLES = {
+            "Ride a boat with a goat",
+            "Visit all nether biomes",
+            "Fill a respawn anchor to the max",
+            "Ride a strider",
+            "Return to sender",
+            "Look at a ghast with a spyglass",
+            "Walk on powder snow with leather boots"
+    };
+
+    public static final String[] HARD_TITLES = {
+            "Kill the ender dragon",
+            "Levitate fifty blocks",
+            "Obtain a netherite hoe",
+            "Pick up a full bee nest",
+            "Use a lodestone",
+            "Look at a parrot with a spyglass",
+    };
+
+    public static final String[] EXPERT_TITLES = {
+            "Play a jukebox in a meadow biome",
+            "Survive a fall from the max to min height",
+            "Ride 50m in the overworld on a strider",
+            "Complete Subspace Bubble",
+            "Complete \"Subspace Bubble\""
+    };
 }

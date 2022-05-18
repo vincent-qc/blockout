@@ -105,10 +105,9 @@ public class LockoutScreen extends Screen {
         String fTOneScore = TeamHandler.getScore(1) < 10 ? "0" + TeamHandler.getScore(1): String.valueOf(TeamHandler.getScore(1));
         String fTTwoScore = TeamHandler.getScore(2) < 10 ? "0" + TeamHandler.getScore(2): String.valueOf(TeamHandler.getScore(2));
 
-
-        drawCenteredString(stack, font, fTOneScore, xPos + (52 - 15), yPos + 10, 0xF07070);
-        drawCenteredString(stack, font, "-", xPos + 52, yPos + 10, 0xFFFFFF);
-        drawCenteredString(stack, font, fTTwoScore, xPos + (52 + 15), yPos + 10, 0x70B0F0);
+        font.draw(stack, fTOneScore, xPos + (52 - 15), yPos + 10, 0xF04040);
+        font.draw(stack, "-", xPos + 52, yPos + 10, 0xFFFFFF);
+        font.draw(stack, fTTwoScore, xPos + (52 + 9), yPos + 10, 0x4080F0);
     }
 
 

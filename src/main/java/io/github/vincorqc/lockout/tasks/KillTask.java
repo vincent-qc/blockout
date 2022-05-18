@@ -13,14 +13,11 @@ import java.util.Random;
 
 public class KillTask extends Task {
     private final String mob;
-    private Item icon;
 
     public KillTask(TaskDifficulty difficulty) {
         super(difficulty);
-
         // Assign Random Advancement
         Random r = new Random();
-        int index;
         if(difficulty == TaskDifficulty.EASY) {
             index = r.nextInt(MobList.EASY_MOBS.length);
             this.mob = MobList.EASY_MOBS[index];
@@ -42,13 +39,38 @@ public class KillTask extends Task {
         title = "Kill a " + mob;
     }
 
-    public String getMob() {
-        return mob;
+    public KillTask(String difficulty, int index) {
+        super(difficulty);
+        this.index = index;
+
+        switch (difficulty) {
+            case "easy" -> {
+                this.difficulty = TaskDifficulty.EASY;
+                this.mob = MobList.EASY_MOBS[index];
+                this.icon = MobList.EASY_ICONS[index];
+            }
+            case "medium" -> {
+                this.difficulty = TaskDifficulty.MEDIUM;
+                this.mob = MobList.MEDIUM_MOBS[index];
+                this.icon = MobList.MEDIUM_ICONS[index];
+            }
+            case "hard" -> {
+                this.difficulty = TaskDifficulty.HARD;
+                this.mob = MobList.HARD_MOBS[index];
+                this.icon = MobList.HARD_ICONS[index];
+            }
+            default -> {
+                this.difficulty = TaskDifficulty.EXPERT;
+                this.mob = MobList.EXPERT_MOBS[index];
+                this.icon = MobList.EXPERT_ICONS[index];
+            }
+        }
+
+        title = "Kill a " + mob;
     }
 
-    @Override
-    public ResourceLocation getIdentifier() {
-        return new ResourceLocation(LockoutMod.MODID, "textures/tasks/identifiers/kill.png");
+    public String getMob() {
+        return mob;
     }
 
     @Override

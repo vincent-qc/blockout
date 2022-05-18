@@ -11,14 +11,12 @@ import java.util.Random;
 
 public class EffectTask extends Task {
     private final MobEffect effect;
-    private Item icon;
 
     public EffectTask(TaskDifficulty difficulty) {
         super(difficulty);
 
         // Assign Random Item
         Random r = new Random();
-        int index;
         if(difficulty == TaskDifficulty.EASY) {
             index = r.nextInt(EffectList.EASY_EFFECTS.length);
             this.effect = EffectList.EASY_EFFECTS[index];
@@ -27,6 +25,22 @@ public class EffectTask extends Task {
             index = r.nextInt(EffectList.MEDIUM_EFFECTS.length);
             this.effect = EffectList.MEDIUM_EFFECTS[index];
             icon = EffectList.MEDIUM_ICONS[index];
+        }
+
+        title = "Obtain " + effect.getDisplayName().getString();
+    }
+
+    public EffectTask(String difficulty, int index) {
+        super(difficulty);
+        this.index = index;
+        if(difficulty.equals("easy")) {
+            this.difficulty = TaskDifficulty.EASY;
+            this.effect = EffectList.EASY_EFFECTS[index];
+            this.icon = EffectList.EASY_ICONS[index];
+        } else {
+            this.difficulty = TaskDifficulty.MEDIUM;
+            this.effect = EffectList.MEDIUM_EFFECTS[index];
+            this.icon = EffectList.MEDIUM_ICONS[index];
         }
 
         title = "Obtain " + effect.getDisplayName().getString();
