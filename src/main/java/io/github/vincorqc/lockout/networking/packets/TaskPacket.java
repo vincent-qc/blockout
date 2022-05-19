@@ -46,8 +46,6 @@ public class TaskPacket {
             ctx.get().enqueueWork( ()-> {
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
                     LockoutGameHandler.amendGrid(msg.row, msg.col, generateTask(msg.type, msg.difficulty, msg.index, msg.team));
-                    LockoutMod.LOGGER.info("ROW: " + msg.row + " COL: " + msg.col);
-                    LockoutMod.LOGGER.info("TYPE: " + msg.type + " DIFF: " + msg.difficulty + " INDEX: " + msg.index);
                 });
             });
             ctx.get().setPacketHandled(true);
