@@ -73,10 +73,7 @@ public class LockoutMod
 
     private void processIMC(final InterModProcessEvent event)
     {
-        // Some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.messageSupplier().get()).
-                collect(Collectors.toList()));
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -89,17 +86,5 @@ public class LockoutMod
         StartCommand.register(server.getCommands().getDispatcher());
         TeamCommand.register(server.getCommands().getDispatcher());
 
-    }
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents
-    {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
-        {
-
-        }
     }
 }
