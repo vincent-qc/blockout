@@ -1,7 +1,5 @@
-package io.github.vincorqc.lockout.util;
+package io.github.vincorqc.lockout.data;
 
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -19,7 +17,8 @@ public class MobList {
             "Ghast",
             "Strider",
             "Piglin",
-            "Turtle"
+            "Turtle",
+            "Zombified Piglin"
     };
 
     public static final String[] MEDIUM_MOBS = {
@@ -35,14 +34,16 @@ public class MobList {
             "Zombie Villager",
             "Dolphin",
             "Piglin Brute",
-            "Witch"
+            "Witch",
+            "Llama"
     };
 
     public static final String[] HARD_MOBS = {
             "Shulker",
             "Endermite",
             "Mule",
-            "Panda"
+            "Panda",
+            "Polar Bear"
     };
 
     public static final String[] EXPERT_MOBS = {
@@ -64,7 +65,8 @@ public class MobList {
             Items.GHAST_SPAWN_EGG,
             Items.STRIDER_SPAWN_EGG,
             Items.PIGLIN_SPAWN_EGG,
-            Items.TURTLE_SPAWN_EGG
+            Items.TURTLE_SPAWN_EGG,
+            Items.ZOMBIFIED_PIGLIN_SPAWN_EGG
     };
 
     public static final Item[] MEDIUM_ICONS = {
@@ -80,7 +82,8 @@ public class MobList {
             Items.ZOMBIE_VILLAGER_SPAWN_EGG,
             Items.DOLPHIN_SPAWN_EGG,
             Items.PIGLIN_BRUTE_SPAWN_EGG,
-            Items.WITCH_SPAWN_EGG
+            Items.WITCH_SPAWN_EGG,
+            Items.LLAMA_SPAWN_EGG
     };
 
     public static final Item[] HARD_ICONS = {
@@ -88,6 +91,7 @@ public class MobList {
             Items.ENDERMITE_SPAWN_EGG,
             Items.MULE_SPAWN_EGG,
             Items.PANDA_SPAWN_EGG,
+            Items.POLAR_BEAR_SPAWN_EGG
     };
 
     public static final Item[] EXPERT_ICONS = {

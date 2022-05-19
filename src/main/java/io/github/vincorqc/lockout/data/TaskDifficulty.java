@@ -1,4 +1,4 @@
-package io.github.vincorqc.lockout.util;
+package io.github.vincorqc.lockout.data;
 
 public enum TaskDifficulty {
     EASY,

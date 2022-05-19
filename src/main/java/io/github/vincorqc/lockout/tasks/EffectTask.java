@@ -1,10 +1,8 @@
 package io.github.vincorqc.lockout.tasks;
 
-import io.github.vincorqc.lockout.util.EffectList;
-import io.github.vincorqc.lockout.util.ItemList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
+import io.github.vincorqc.lockout.data.EffectList;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Random;

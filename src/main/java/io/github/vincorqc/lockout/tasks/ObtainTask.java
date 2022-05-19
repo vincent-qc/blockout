@@ -1,7 +1,7 @@
 package io.github.vincorqc.lockout.tasks;
 
-import io.github.vincorqc.lockout.util.TaskDifficulty;
-import io.github.vincorqc.lockout.util.ItemList;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
+import io.github.vincorqc.lockout.data.ItemList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 

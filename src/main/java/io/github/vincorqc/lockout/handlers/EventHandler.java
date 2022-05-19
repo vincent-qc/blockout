@@ -1,9 +1,11 @@
 package io.github.vincorqc.lockout.handlers;
 
-import io.github.vincorqc.lockout.common.LockoutMod;
+import io.github.vincorqc.lockout.commands.StartCommand;
 import io.github.vincorqc.lockout.gui.LockoutScreen;
-import io.github.vincorqc.lockout.util.Keybinds;
+import io.github.vincorqc.lockout.data.Keybinds;
+import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,8 +18,6 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-
-import java.util.concurrent.locks.Lock;
 
 public class EventHandler {
 
@@ -56,7 +56,6 @@ public class EventHandler {
     public void kill(LivingDeathEvent event) {
 
         if(event.getEntity() instanceof Player p) {
-            System.out.println("PLAYER " + p.getName().getString() + " DIED BY " + event.getSource().getMsgId());
             VerificationHandler.validateDeath(p, event.getSource());
         }
 
@@ -86,7 +85,6 @@ public class EventHandler {
 
     @SubscribeEvent
     public void mine(BlockEvent.BreakEvent event) {
-        System.out.println("PLAYER " + event.getPlayer().getName().getString() + " MINED " + event.getState().getBlock().getName().getString());
         VerificationHandler.validateMine(event.getPlayer(), event.getState().getBlock());
     }
 
@@ -106,27 +104,10 @@ public class EventHandler {
     @SubscribeEvent
     @OnlyIn(Dist.DEDICATED_SERVER)
     public void playerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        System.out.println("\n\n\n" + "JOINED ID: " + event.getPlayer().getName().getString());
-
         TeamHandler.addPlayer(event.getPlayer());
         TeamHandler.setTeam(event.getPlayer(), 1);
 
-        LockoutGameHandler.syncTasks();
-    }
-
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void openLockoutGUI(TickEvent.ClientTickEvent event) {
-        if(Keybinds.key.isDown()) {
-
-            Minecraft.getInstance().setScreen(new LockoutScreen(new TextComponent("Blockout")));
-        }
-    }
-
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void registerKeyBindings(FMLClientSetupEvent event) {
-        Keybinds.register();
+        LockoutPacketHandler.sync();
     }
 
     private static int tick = 0;
@@ -135,9 +116,14 @@ public class EventHandler {
     public void serverTick(TickEvent.ServerTickEvent event) {
         tick++;
 
-        if(tick >= 2000) {
+        if(tick >= 3000) {
             tick = 0;
-            LockoutGameHandler.syncTasks();
+            LockoutPacketHandler.sync();
         }
     }
+
+
+    /* CLIENT EVENTS */
+
+
 }

@@ -33,11 +33,10 @@ public class TeamPacket {
         public static void handle(TeamPacket msg, Supplier<NetworkEvent.Context> ctx){
             ctx.get().enqueueWork( ()-> {
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                    if(LockoutMod.server != null)
-                        TeamHandler.setTeam(Objects.requireNonNull(
-                                LockoutMod.server.getPlayerList().getPlayer(UUID.fromString(msg.name))), msg.team);
-                        });
+                    if(LockoutMod.server != null) TeamHandler.setTeam(msg.name, msg.team);
+                });
             });
+
             ctx.get().setPacketHandled(true);
         }
     }

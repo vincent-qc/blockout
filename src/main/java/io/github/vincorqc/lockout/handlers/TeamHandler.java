@@ -6,6 +6,8 @@ import io.github.vincorqc.lockout.networking.packets.TeamPacket;
 import io.github.vincorqc.lockout.networking.packets.TeamScorePacket;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
@@ -22,9 +24,26 @@ public class TeamHandler {
         playerTeams.put(p.getName().getString(), -1);
     }
 
+    public static void addPlayer(String p) {
+        if(playerTeams.containsKey(p)) return;
+
+        playerTeams.put(p, -1);
+    }
+
     public static void setTeam(Player p, int team) {
         if(playerTeams.containsKey(p.getName().getString())) {
             playerTeams.replace(p.getName().getString(), team);
+        } else {
+            addPlayer(p);
+        }
+
+        if(team == -1) return;
+        if(!teamScores.containsKey(team)) teamScores.put(team, 0);
+    }
+
+    public static void setTeam(String p, int team) {
+        if(playerTeams.containsKey(p)) {
+            playerTeams.replace(p, team);
         } else {
             addPlayer(p);
         }
@@ -45,7 +64,8 @@ public class TeamHandler {
                 TextComponent text = new TextComponent("Team " + team + " won!");
 
                 for(Player p : LockoutMod.server.getPlayerList().getPlayers()) {
-                    LockoutMod.server.getPlayerList().broadcastMessage(text, ChatType.SYSTEM, p.getUUID());
+                    p.sendMessage(text, p.getUUID());
+                    p.playNotifySound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.MASTER, 80, 1);
                 }
             }
         }

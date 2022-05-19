@@ -1,8 +1,5 @@
-package io.github.vincorqc.lockout.util;
+package io.github.vincorqc.lockout.data;
 
-import net.minecraft.advancements.Advancement;
-import net.minecraft.client.gui.screens.advancements.AdvancementTab;
-import net.minecraft.data.advancements.AdventureAdvancements;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -120,7 +117,7 @@ public class AdvancementList {
             "Play a jukebox in a meadow biome",
             "Survive a fall from the max to min height",
             "Ride 50m in the overworld on a strider",
-            "Complete Subspace Bubble",
-            "Complete \"Subspace Bubble\""
+            "Complete \"Subspace Bubble\"",
+            "Respawn ender dragon"
     };
 }

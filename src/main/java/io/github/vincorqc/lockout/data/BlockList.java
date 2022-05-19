@@ -1,4 +1,4 @@
-package io.github.vincorqc.lockout.util;
+package io.github.vincorqc.lockout.data;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

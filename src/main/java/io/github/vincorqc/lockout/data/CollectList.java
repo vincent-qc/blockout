@@ -1,8 +1,7 @@
-package io.github.vincorqc.lockout.util;
+package io.github.vincorqc.lockout.data;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import org.lwjgl.system.CallbackI;
 
 public class CollectList {
     public static Item[][] HARD_COLLECT = {

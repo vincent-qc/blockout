@@ -1,11 +1,8 @@
 package io.github.vincorqc.lockout.tasks;
 
-import io.github.vincorqc.lockout.util.MobList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-
-import java.util.Random;
 
 public class ExperienceTask extends Task {
     private final int level;

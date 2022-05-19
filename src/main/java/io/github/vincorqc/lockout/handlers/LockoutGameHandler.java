@@ -2,12 +2,8 @@ package io.github.vincorqc.lockout.handlers;
 
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import io.github.vincorqc.lockout.networking.packets.TaskPacket;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import io.github.vincorqc.lockout.tasks.*;
-import io.github.vincorqc.lockout.util.OpponentList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -57,8 +53,9 @@ public class LockoutGameHandler {
         for(int r = 0; r < 5; r++) {
             for(int c = 0; c < 5; c++) {
                 Task t = grid[r][c];
+                if(t == null) continue;
+
                 LockoutPacketHandler.sendAll(new TaskPacket(getType(t), getDifficulty(t), t.getIndex(), t.getTeam(), r, c));
-                System.out.println("SYNCED TASKS");
             }
         }
     }
@@ -87,7 +84,7 @@ public class LockoutGameHandler {
             TaskDifficulty d = TaskDifficulty.EASY;
 
             if(type < 25) t = new AdvancementTask(d);
-            else if(type < 35) t = new ObtainTask(d);
+            else if(type < 40) t = new ObtainTask(d);
             else if(type < 50) t = new KillTask(d);
             else if(type < 70) t = new EffectTask(d);
             else if(type < 85) t = new MineTask(d);
@@ -97,8 +94,8 @@ public class LockoutGameHandler {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.MEDIUM;
 
-            if(type < 15) t = new AdvancementTask(d);
-            else if(type < 28) t = new ObtainTask(d);
+            if(type < 20) t = new AdvancementTask(d);
+            else if(type < 35) t = new ObtainTask(d);
             else if(type < 45) t = new KillTask(d);
             else if(type < 60) t = new EffectTask(d);
             else if(type < 75) t = new MineTask(d);
@@ -166,14 +163,14 @@ public class LockoutGameHandler {
     }
 
     public static String asString() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
 
         for(Task[] r : grid) {
             for(Task t : r) {
-                res += t.getTitle() + " - TEAM: " + t.getTeam() + "\n";
+                res.append(t.getTitle()).append(" - TEAM: ").append(t.getTeam()).append("\n");
             }
         }
 
-        return res;
+        return res.toString();
     }
 }

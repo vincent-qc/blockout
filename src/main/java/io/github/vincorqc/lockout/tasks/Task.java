@@ -1,20 +1,20 @@
 package io.github.vincorqc.lockout.tasks;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.handlers.TeamHandler;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
+import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class Task {
@@ -42,8 +42,11 @@ public class Task {
         if(team == -1) {
             team = TeamHandler.getTeam(p);
             try {
+                TextComponent text = new TextComponent("Team " + team + " has completed " + title);
+
                 for(Player pl : LockoutMod.server.getPlayerList().getPlayers()) {
-                    LockoutMod.server.getPlayerList().broadcastMessage(new TextComponent(p.getName().getString() + " COMPLETED: " + title), ChatType.GAME_INFO, pl.getUUID());
+                    pl.sendMessage(text, pl.getUUID());
+                    pl.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.MASTER, 90, 1);
                 }
 
             } catch (Exception e) {
@@ -51,7 +54,9 @@ public class Task {
             }
 
             TeamHandler.incrementScore(team);
-            LockoutGameHandler.syncTasks();
+
+            LockoutPacketHandler.sync();
+
         }
     }
 
@@ -61,15 +66,18 @@ public class Task {
         if(team == -1) {
             team = t;
             try {
-                for(Player p : LockoutMod.server.getPlayerList().getPlayers()) {
-                    LockoutMod.server.getPlayerList().broadcastMessage(new TextComponent("Team " + t + " has completed " + title), ChatType.GAME_INFO, p.getUUID());
+                TextComponent text = new TextComponent("Team " + t + " has completed " + title);
+
+                for(Player pl : LockoutMod.server.getPlayerList().getPlayers()) {
+                    pl.sendMessage(text, pl.getUUID());
+                    pl.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.MASTER, 90, 1);
                 }
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
 
             TeamHandler.incrementScore(team);
-            LockoutGameHandler.syncTasks();
+            LockoutPacketHandler.sync();
         }
     }
 

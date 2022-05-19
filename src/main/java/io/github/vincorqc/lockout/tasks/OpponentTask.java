@@ -1,14 +1,10 @@
 package io.github.vincorqc.lockout.tasks;
 
-import io.github.vincorqc.lockout.common.LockoutMod;
-import io.github.vincorqc.lockout.util.ItemList;
-import io.github.vincorqc.lockout.util.OpponentList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
-import net.minecraft.resources.ResourceLocation;
+import io.github.vincorqc.lockout.data.OpponentList;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class OpponentTask extends Task {

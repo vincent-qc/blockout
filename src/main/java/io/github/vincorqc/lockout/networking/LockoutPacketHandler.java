@@ -1,6 +1,8 @@
 package io.github.vincorqc.lockout.networking;
 
 import io.github.vincorqc.lockout.common.LockoutMod;
+import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
+import io.github.vincorqc.lockout.handlers.TeamHandler;
 import io.github.vincorqc.lockout.networking.packets.TaskPacket;
 import io.github.vincorqc.lockout.networking.packets.TeamPacket;
 import io.github.vincorqc.lockout.networking.packets.TeamScorePacket;
@@ -36,5 +38,15 @@ public class LockoutPacketHandler {
 
     public static void sendAll(Object msg) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
+    }
+
+    public static void sync() {
+        try {
+            LockoutGameHandler.syncTasks();
+            TeamHandler.syncTeamData();
+            TeamHandler.syncTeamScores();
+        } catch (Exception e) {
+            LockoutMod.LOGGER.info("Exception caught while trying to sync: " + e);
+        }
     }
 }

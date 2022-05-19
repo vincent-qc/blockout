@@ -1,23 +1,22 @@
 package io.github.vincorqc.lockout.common;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
+import io.github.vincorqc.lockout.commands.StartCommand;
+import io.github.vincorqc.lockout.commands.TeamCommand;
+import io.github.vincorqc.lockout.data.Keybinds;
+import io.github.vincorqc.lockout.handlers.ClientHandler;
 import io.github.vincorqc.lockout.handlers.EventHandler;
-import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
-import io.github.vincorqc.lockout.util.DamageList;
-import io.github.vincorqc.lockout.util.Keybinds;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -28,8 +27,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 import java.util.stream.Collectors;
-
-import static com.mojang.blaze3d.platform.InputConstants.Type.KEYSYM;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("lockout")
@@ -54,27 +51,17 @@ public class LockoutMod
         MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.register(new EventHandler());
-
-
+        MinecraftForge.EVENT_BUS.register(new ClientHandler());
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
-        LockoutGameHandler.setGameStarted(true);
+        LOGGER.info("\n\n PREINIT SUCCESSFUL \n\n");
 
         LockoutPacketHandler.register();
 
-        LockoutGameHandler.generateGrid();
-
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> Keybinds::register);
     }
-
-
-
-
 
 
     // Irrelevant but im too scared to remove since the forge docs are sus
@@ -97,8 +84,11 @@ public class LockoutMod
     public void onServerStarting(ServerStartingEvent event)
     {
         // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("\n\n SERVER STARTED! \n\n");
         server = event.getServer();
+        StartCommand.register(server.getCommands().getDispatcher());
+        TeamCommand.register(server.getCommands().getDispatcher());
+
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

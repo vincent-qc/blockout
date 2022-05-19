@@ -1,26 +1,9 @@
 package io.github.vincorqc.lockout.tasks;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import io.github.vincorqc.lockout.common.LockoutMod;
-import io.github.vincorqc.lockout.util.AdvancementList;
-import io.github.vincorqc.lockout.util.ItemList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
+import io.github.vincorqc.lockout.data.AdvancementList;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.item.ItemStack;
-import org.openjdk.nashorn.internal.parser.JSONParser;
 
-import javax.json.JsonObject;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Random;
 
 public class AdvancementTask extends Task {

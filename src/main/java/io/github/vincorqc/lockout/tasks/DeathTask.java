@@ -1,13 +1,8 @@
 package io.github.vincorqc.lockout.tasks;
 
-import io.github.vincorqc.lockout.common.LockoutMod;
-import io.github.vincorqc.lockout.util.DamageList;
-import io.github.vincorqc.lockout.util.EffectList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
-import net.minecraft.resources.ResourceLocation;
+import io.github.vincorqc.lockout.data.DamageList;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Random;

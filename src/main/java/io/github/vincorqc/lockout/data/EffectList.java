@@ -1,10 +1,7 @@
-package io.github.vincorqc.lockout.util;
+package io.github.vincorqc.lockout.data;
 
-import com.mojang.blaze3d.shaders.Effect;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 

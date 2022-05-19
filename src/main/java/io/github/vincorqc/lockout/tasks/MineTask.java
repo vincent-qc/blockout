@@ -1,10 +1,7 @@
 package io.github.vincorqc.lockout.tasks;
 
-import io.github.vincorqc.lockout.common.LockoutMod;
-import io.github.vincorqc.lockout.util.BlockList;
-import io.github.vincorqc.lockout.util.MobList;
-import io.github.vincorqc.lockout.util.TaskDifficulty;
-import net.minecraft.resources.ResourceLocation;
+import io.github.vincorqc.lockout.data.BlockList;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
