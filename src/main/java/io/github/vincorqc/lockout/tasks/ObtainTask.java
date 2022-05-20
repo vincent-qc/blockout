@@ -5,30 +5,27 @@ import io.github.vincorqc.lockout.data.ItemList;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Map;
 import java.util.Random;
 
 public class ObtainTask extends Task {
     private final Item item;
+    private static final Map<TaskDifficulty, Item[]> list = Map.ofEntries(
+            Map.entry(TaskDifficulty.EASY, ItemList.EASY_ITEMS),
+            Map.entry(TaskDifficulty.MEDIUM, ItemList.MEDIUM_ITEMS),
+            Map.entry(TaskDifficulty.HARD, ItemList.HARD_ITEMS),
+            Map.entry(TaskDifficulty.EXPERT, ItemList.EXPERT_ITEMS)
+    );
 
     public ObtainTask(TaskDifficulty difficulty) {
         super(difficulty);
         // Assign Random Item
         Random r = new Random();
-        if(difficulty == TaskDifficulty.EASY) {
-            index = r.nextInt(ItemList.EASY_ITEMS.length);
-            this.item = ItemList.EASY_ITEMS[index];
-        } else if(difficulty == TaskDifficulty.MEDIUM) {
-            index = r.nextInt(ItemList.MEDIUM_ITEMS.length);
-            this.item = ItemList.MEDIUM_ITEMS[index];
-        } else if(difficulty == TaskDifficulty.HARD) {
-            index = r.nextInt(ItemList.HARD_ITEMS.length);
-            this.item = ItemList.HARD_ITEMS[index];
-        } else {
-            index = r.nextInt(ItemList.EXPERT_ITEMS.length);
-            this.item = ItemList.EXPERT_ITEMS[index];
-        }
+        Item[] data = list.get(difficulty);
 
-        title = "Obtain " + new ItemStack(item).getHoverName().getString();
+        this.index = r.nextInt(data.length);
+        this.item = data[index];
+        this.title = "Obtain " + new ItemStack(item).getHoverName().getString();
     }
 
     public ObtainTask(String difficulty, int index) {

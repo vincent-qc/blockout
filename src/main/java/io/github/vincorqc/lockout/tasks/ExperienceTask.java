@@ -12,7 +12,6 @@ public class ExperienceTask extends Task {
 
         if(difficulty == TaskDifficulty.MEDIUM)
             level = 20;
-
         else
             level = 30;
 
