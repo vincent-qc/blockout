@@ -16,6 +16,7 @@ public class BlockList {
             Blocks.OBSIDIAN,
             Blocks.BASALT,
             Blocks.RED_SAND,
+            Blocks.CRYING_OBSIDIAN
     };
 
     public static final Block[] MEDIUM_BLOCKS = {
@@ -23,7 +24,8 @@ public class BlockList {
             Blocks.DIRT_PATH,
             Blocks.FERN,
             Blocks.SEA_PICKLE,
-            Blocks.GILDED_BLACKSTONE
+            Blocks.GILDED_BLACKSTONE,
+            Blocks.MELON
     };
 
     public static final Block[] HARD_BLOCKS = {

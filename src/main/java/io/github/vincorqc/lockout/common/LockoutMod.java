@@ -85,6 +85,5 @@ public class LockoutMod
         server = event.getServer();
         StartCommand.register(server.getCommands().getDispatcher());
         TeamCommand.register(server.getCommands().getDispatcher());
-
     }
 }

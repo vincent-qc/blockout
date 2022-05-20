@@ -39,10 +39,7 @@ public class EventHandler {
     @SubscribeEvent
     public void use(LivingEntityUseItemEvent.Finish event) {
         if(event.getEntity() instanceof Player) {
-            Player p = (Player) event.getEntity();
-
-
-            System.out.println("USED ITEM: " + event.getItem().getDisplayName().getString() + " BY: " + p.getName().getString());
+            VerificationHandler.validateEat((Player) event.getEntity(), event.getItem().getItem());
         }
     }
 

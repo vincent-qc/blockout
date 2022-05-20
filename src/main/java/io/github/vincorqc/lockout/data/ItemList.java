@@ -5,8 +5,6 @@ import net.minecraft.world.item.Items;
 
 public class ItemList {
     public static final Item[] EASY_ITEMS = {
-            Items.APPLE,
-            Items.BEETROOT,
             Items.BELL,
             Items.CAMPFIRE,
             Items.CAKE,
@@ -18,7 +16,6 @@ public class ItemList {
             Items.FIREWORK_ROCKET,
             Items.FLOWER_POT,
             Items.GHAST_TEAR,
-            Items.GLOW_BERRIES,
             Items.GRINDSTONE,
             Items.HONEYCOMB_BLOCK,
             Items.IRON_BARS,
@@ -26,7 +23,6 @@ public class ItemList {
             Items.DRIED_KELP_BLOCK,
             Items.LANTERN,
             Items.LOOM,
-            Items.MELON,
             Items.MAGMA_CREAM,
             Items.NETHER_WART,
             Items.NOTE_BLOCK,
@@ -51,7 +47,6 @@ public class ItemList {
             Items.BEE_NEST,
             Items.COCOA_BEANS,
             Items.DIAMOND_ORE,
-            Items.FLOWER_BANNER_PATTERN,
             Items.GOLD_ORE,
             Items.ICE,
             Items.IRON_ORE,
@@ -62,16 +57,13 @@ public class ItemList {
             Items.PACKED_ICE,
             Items.PODZOL,
             Items.SLIME_BLOCK,
-            Items.SUSPICIOUS_STEW,
     };
 
     public static final Item[] HARD_ITEMS = {
             Items.AXOLOTL_BUCKET,
             Items.WITHER_SKELETON_SKULL,
-            Items.SKULL_BANNER_PATTERN,
             Items.NETHERITE_INGOT,
             Items.LODESTONE,
-            Items.NAME_TAG,
             Items.DRAGON_BREATH,
             Items.END_CRYSTAL
     };
@@ -79,7 +71,8 @@ public class ItemList {
     public static final Item[] EXPERT_ITEMS = {
             Items.ELYTRA,
             Items.MYCELIUM,
-            Items.SPONGE,
-            Items.TURTLE_HELMET
+            Items.TURTLE_HELMET,
+            Items.SADDLE,
+            Items.NAME_TAG
     };
 }

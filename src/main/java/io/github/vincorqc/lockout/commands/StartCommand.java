@@ -32,6 +32,8 @@ public class StartCommand implements Command<CommandSourceStack> {
 
         TextComponent message = new TextComponent("Game has Started!");
 
+        System.out.println(LockoutGameHandler.asString());
+
         for (Player p : LockoutMod.server.getPlayerList().getPlayers()) {
             p.sendMessage(message, p.getUUID());
         }

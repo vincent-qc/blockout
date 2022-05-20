@@ -84,6 +84,9 @@ public class TaskPacket {
             case "opponent" -> {
                 t = new OpponentTask(difficulty, index);
             }
+            case "eat" -> {
+                t = new EatTask(difficulty, index);
+            }
             default -> {
                 t = null;
             }

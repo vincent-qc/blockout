@@ -75,6 +75,7 @@ public class Task {
 
         for (Player pl : LockoutMod.server.getPlayerList().getPlayers()) {
             pl.sendMessage(text, pl.getUUID());
+
             pl.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.MASTER, 90, 1);
         }
     }

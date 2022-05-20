@@ -125,4 +125,17 @@ public class VerificationHandler extends LockoutGameHandler {
             }
         }
     }
+
+    public static void validateEat(Player p, Item food) {
+        for(int i = 0; i < eatTasks.size(); i++) {
+            EatTask task = eatTasks.get(i);
+
+
+            if(task.getItem().equals(food)) {
+                task.complete(p);
+                eatTasks.remove(task);
+                i--;
+            }
+        }
+    }
 }

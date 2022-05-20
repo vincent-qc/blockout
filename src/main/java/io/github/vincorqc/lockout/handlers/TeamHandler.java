@@ -9,7 +9,10 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import org.checkerframework.checker.units.qual.A;
+import org.lwjgl.system.CallbackI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -69,6 +72,15 @@ public class TeamHandler {
                 }
             }
         }
+    }
+
+    public static ArrayList<Player> getTeamPlayers(int team) {
+        ArrayList<Player> players = new ArrayList<>();
+        for(Player p : LockoutMod.server.getPlayerList().getPlayers()) {
+            if(getTeam(p) == team) players.add(p);
+        }
+
+        return players;
     }
 
     public static int getScore(int team) {

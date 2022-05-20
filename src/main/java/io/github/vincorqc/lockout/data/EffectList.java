@@ -43,6 +43,6 @@ public class EffectList {
             Items.GLOWSTONE_DUST,
             Items.ENDER_PEARL,
             Items.PUFFERFISH,
-            Items.TURTLE_HELMET
+            Items.SCUTE
     };
 }

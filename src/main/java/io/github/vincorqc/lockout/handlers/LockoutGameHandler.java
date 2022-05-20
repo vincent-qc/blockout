@@ -4,6 +4,7 @@ import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import io.github.vincorqc.lockout.networking.packets.TaskPacket;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import io.github.vincorqc.lockout.tasks.*;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,6 +24,7 @@ public class LockoutGameHandler {
     protected static final ArrayList<CollectTask> collectTasks = new ArrayList<>();
     protected static final ArrayList<ExperienceTask> experienceTasks = new ArrayList<>();
     protected static final ArrayList<OpponentTask> opponentTasks = new ArrayList<>();
+    protected static final ArrayList<EatTask> eatTasks = new ArrayList<>();
 
     private static final ArrayList<String> usedTasks = new ArrayList<>();
 
@@ -41,8 +43,6 @@ public class LockoutGameHandler {
                 grid[r][c] = t;
             }
         }
-
-        System.out.println("\n\n\n\n\n\n\n" + asString());
     }
 
     public static void amendGrid(int r, int c, Task t) {
@@ -79,41 +79,44 @@ public class LockoutGameHandler {
         Random r = new Random();
         int diff = r.nextInt(100);
 
-        if(diff < 25) {
+        if(diff < 30) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.EASY;
 
-            if(type < 25) t = new AdvancementTask(d);
-            else if(type < 40) t = new ObtainTask(d);
-            else if(type < 50) t = new KillTask(d);
+            if(type < 20) t = new AdvancementTask(d);
+            if(type < 30) t = new EatTask(d);
+            else if(type < 45) t = new ObtainTask(d);
+            else if(type < 55) t = new KillTask(d);
             else if(type < 70) t = new EffectTask(d);
             else if(type < 85) t = new MineTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < 60) {
+        } else if(diff < 70) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.MEDIUM;
 
-            if(type < 20) t = new AdvancementTask(d);
-            else if(type < 35) t = new ObtainTask(d);
-            else if(type < 45) t = new KillTask(d);
-            else if(type < 60) t = new EffectTask(d);
-            else if(type < 75) t = new MineTask(d);
-            else if(type < 83) t = new OpponentTask(d);
-            else if(type < 85) t = new ExperienceTask(d);
+            if(type < 15) t = new AdvancementTask(d);
+            else if(type < 30) t = new ObtainTask(d);
+            else if(type < 40) t = new EatTask(d);
+            else if(type < 50) t = new KillTask(d);
+            else if(type < 65) t = new EffectTask(d);
+            else if(type < 80) t = new MineTask(d);
+            else if(type < 85) t = new OpponentTask(d);
+            else if(type < 90) t = new ExperienceTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < 90) {
+        } else if(diff < 92) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.HARD;
 
             if(type < 15) t = new AdvancementTask(d);
             else if(type < 25) t = new ObtainTask(d);
             else if(type < 35) t = new KillTask(d);
-            else if(type < 50) t = new CollectTask(d);
-            else if(type < 56) t = new MineTask(d);
+            else if(type < 55) t = new CollectTask(d);
+            else if(type < 70) t = new MineTask(d);
             else if(type < 80) t = new OpponentTask(d);
             else if(type < 85) t = new ExperienceTask(d);
+            else if(type < 90) t = new EatTask(d);
             else if(type < 100) t = new DeathTask(d);
 
         } else {
@@ -139,6 +142,7 @@ public class LockoutGameHandler {
         else if(t instanceof CollectTask) collectTasks.add((CollectTask) t);
         else if(t instanceof ExperienceTask) experienceTasks.add((ExperienceTask) t);
         else if(t instanceof OpponentTask) opponentTasks.add((OpponentTask) t);
+        else if(t instanceof EatTask) eatTasks.add((EatTask) t);
     }
 
     private static String getType(Task t) {
@@ -151,6 +155,7 @@ public class LockoutGameHandler {
         else if(t instanceof CollectTask) return "collect";
         else if(t instanceof ExperienceTask) return "experience";
         else if(t instanceof OpponentTask) return "opponent";
+        else if(t instanceof EatTask) return "eat";
         return null;
     }
 
