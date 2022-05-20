@@ -31,26 +31,15 @@ public class DeathTask extends Task {
         this.title = data.getC()[index];
     }
 
-    public DeathTask(String difficulty, int index) {
+    public DeathTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
-        this.index = index;
 
-        if(difficulty.equals("easy")) {
-            this.difficulty = TaskDifficulty.EASY;
-            this.damageSource = DamageList.EASY_DAMAGE[index];
-            this.icon = DamageList.EASY_ICONS[index];
-            title = DamageList.EASY_TITLES[index];
-        } else if(difficulty.equals("medium")) {
-            this.difficulty = TaskDifficulty.MEDIUM;
-            this.damageSource = DamageList.MEDIUM_DAMAGE[index];
-            this.icon = DamageList.MEDIUM_ICONS[index];
-            title = DamageList.MEDIUM_TITLES[index];
-        } else {
-            this.difficulty = TaskDifficulty.HARD;
-            this.damageSource = DamageList.HARD_DAMAGE[index];
-            this.icon = DamageList.HARD_ICONS[index];
-            title = DamageList.HARD_TITLES[index];
-        }
+        Triplet<DamageSource[], Item[], String[]> data = list.get(difficulty);
+
+        this.index = index;
+        this.damageSource = data.getA()[index];
+        this.icon = data.getB()[index];
+        this.title = data.getC()[index];
     }
 
     public DamageSource getDamageSource() {

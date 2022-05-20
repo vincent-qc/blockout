@@ -31,35 +31,14 @@ public class AdvancementTask extends Task {
         this.title = data.getC()[index];
     }
 
-    public AdvancementTask(String difficulty, int index) {
+    public AdvancementTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
 
-        switch (difficulty) {
-            case "easy" -> {
-                this.advancement = AdvancementList.EASY_ADVANCEMENTS[index];
-                this.difficulty = TaskDifficulty.EASY;
-                this.icon = AdvancementList.EASY_ICONS[index];
-                title = AdvancementList.EASY_TITLES[index];
-            }
-            case "medium" -> {
-                this.advancement = AdvancementList.MEDIUM_ADVANCEMENTS[index];
-                this.difficulty = TaskDifficulty.MEDIUM;
-                this.icon = AdvancementList.MEDIUM_ICONS[index];
-                title = AdvancementList.MEDIUM_TITLES[index];
-            }
-            case "hard" -> {
-                this.advancement = AdvancementList.HARD_ADVANCEMENTS[index];
-                this.difficulty = TaskDifficulty.HARD;
-                this.icon = AdvancementList.HARD_ICONS[index];
-                title = AdvancementList.HARD_TITLES[index];
-            }
-            default -> {
-                this.advancement = AdvancementList.EXPERT_ADVANCEMENTS[index];
-                this.difficulty = TaskDifficulty.EXPERT;
-                this.icon = AdvancementList.EXPERT_ICONS[index];
-                title = AdvancementList.EXPERT_TITLES[index];
-            }
-        }
+        Triplet<String[], Item[], String[]> data = list.get(difficulty);
+        this.index = index;
+        this.advancement = data.getA()[index];
+        this.icon = data.getB()[index];
+        this.title = data.getC()[index];
     }
 
     public String getAdvancement() {

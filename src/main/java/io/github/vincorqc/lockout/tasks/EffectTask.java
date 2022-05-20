@@ -30,20 +30,15 @@ public class EffectTask extends Task {
         this.title = "Obtain " + effect.getDisplayName().getString();
     }
 
-    public EffectTask(String difficulty, int index) {
+    public EffectTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
-        this.index = index;
-        if(difficulty.equals("easy")) {
-            this.difficulty = TaskDifficulty.EASY;
-            this.effect = EffectList.EASY_EFFECTS[index];
-            this.icon = EffectList.EASY_ICONS[index];
-        } else {
-            this.difficulty = TaskDifficulty.MEDIUM;
-            this.effect = EffectList.MEDIUM_EFFECTS[index];
-            this.icon = EffectList.MEDIUM_ICONS[index];
-        }
+        ;
+        Tuple<MobEffect[], Item[]> data = list.get(difficulty);
 
-        title = "Obtain " + effect.getDisplayName().getString();
+        this.index = index;
+        this.effect = data.getA()[index];
+        this.icon = data.getB()[index];
+        this.title = "Obtain " + effect.getDisplayName().getString();
     }
 
     public MobEffect getEffect() {

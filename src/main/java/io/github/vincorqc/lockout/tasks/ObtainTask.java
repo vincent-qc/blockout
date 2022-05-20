@@ -28,30 +28,14 @@ public class ObtainTask extends Task {
         this.title = "Obtain " + new ItemStack(item).getHoverName().getString();
     }
 
-    public ObtainTask(String difficulty, int index) {
+    public ObtainTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
+
+        Item[] data = list.get(difficulty);
+
         this.index = index;
-
-        switch (difficulty) {
-            case "easy" -> {
-                this.item = ItemList.EASY_ITEMS[index];
-                this.difficulty = TaskDifficulty.EASY;
-            }
-            case "medium" -> {
-                this.item = ItemList.MEDIUM_ITEMS[index];
-                this.difficulty = TaskDifficulty.MEDIUM;
-            }
-            case "hard" -> {
-                this.item = ItemList.HARD_ITEMS[index];
-                this.difficulty = TaskDifficulty.HARD;
-            }
-            default -> {
-                this.item = ItemList.EXPERT_ITEMS[index];
-                this.difficulty = TaskDifficulty.EXPERT;
-            }
-        }
-
-        title = "Obtain " + new ItemStack(item).getHoverName().getString();
+        this.item = data[index];
+        this.title = "Obtain " + new ItemStack(item).getHoverName().getString();
     }
 
     @Override

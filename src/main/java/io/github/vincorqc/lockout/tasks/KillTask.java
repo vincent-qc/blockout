@@ -30,34 +30,15 @@ public class KillTask extends Task {
         this.title = "Kill a " + mob;
     }
 
-    public KillTask(String difficulty, int index) {
+    public KillTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
+
+        Tuple<String[], Item[]> data = list.get(difficulty);
+
         this.index = index;
-
-        switch (difficulty) {
-            case "easy" -> {
-                this.difficulty = TaskDifficulty.EASY;
-                this.mob = MobList.EASY_MOBS[index];
-                this.icon = MobList.EASY_ICONS[index];
-            }
-            case "medium" -> {
-                this.difficulty = TaskDifficulty.MEDIUM;
-                this.mob = MobList.MEDIUM_MOBS[index];
-                this.icon = MobList.MEDIUM_ICONS[index];
-            }
-            case "hard" -> {
-                this.difficulty = TaskDifficulty.HARD;
-                this.mob = MobList.HARD_MOBS[index];
-                this.icon = MobList.HARD_ICONS[index];
-            }
-            default -> {
-                this.difficulty = TaskDifficulty.EXPERT;
-                this.mob = MobList.EXPERT_MOBS[index];
-                this.icon = MobList.EXPERT_ICONS[index];
-            }
-        }
-
-        title = "Kill a " + mob;
+        this.mob = data.getA()[index];
+        this.icon = data.getB()[index];
+        this.title = "Kill a " + mob;
     }
 
     public String getMob() {

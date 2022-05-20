@@ -26,13 +26,6 @@ public class Task {
         this.difficulty = difficulty;
     }
 
-    public Task(String difficulty) {
-        if (difficulty.equals("easy")) this.difficulty = TaskDifficulty.EASY;
-        else if (difficulty.equals("medium")) this.difficulty = TaskDifficulty.MEDIUM;
-        else if (difficulty.equals("hard")) this.difficulty = TaskDifficulty.HARD;
-        else this.difficulty = TaskDifficulty.EXPERT;
-    }
-
     public void complete(Player p) {
         if (!LockoutGameHandler.getGameStarted()) return;
 

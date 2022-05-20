@@ -1,6 +1,7 @@
 package io.github.vincorqc.lockout.networking.packets;
 
 import io.github.vincorqc.lockout.common.LockoutMod;
+import io.github.vincorqc.lockout.data.TaskDifficulty;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.tasks.*;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,9 +20,9 @@ public class TaskPacket {
     private final int row;
     private final int col;
 
-    public TaskPacket(String type, String difficulty, int index, int team, int row, int col) {
+    public TaskPacket(String type, TaskDifficulty difficulty, int index, int team, int row, int col) {
         this.type = type;
-        this.difficulty = difficulty;
+        this.difficulty = difficulty.name();
         this.index = index;
         this.team = team;
         this.row = row;
@@ -38,21 +39,21 @@ public class TaskPacket {
     }
 
     public static TaskPacket decode(FriendlyByteBuf buffer) {
-        return new TaskPacket(buffer.readUtf(), buffer.readUtf(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt());
+        return new TaskPacket(buffer.readUtf(), TaskDifficulty.valueOf(buffer.readUtf()), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt());
     }
 
     public static class Handler {
         public static void handle(TaskPacket msg, Supplier<NetworkEvent.Context> ctx){
             ctx.get().enqueueWork( ()-> {
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                    LockoutGameHandler.amendGrid(msg.row, msg.col, generateTask(msg.type, msg.difficulty, msg.index, msg.team));
+                    LockoutGameHandler.amendGrid(msg.row, msg.col, generateTask(msg.type, TaskDifficulty.valueOf(msg.difficulty), msg.index, msg.team));
                 });
             });
             ctx.get().setPacketHandled(true);
         }
     }
 
-    private static Task generateTask(String type, String difficulty, int index, int team) {
+    private static Task generateTask(String type, TaskDifficulty difficulty, int index, int team) {
         Task t;
 
         switch (type) {

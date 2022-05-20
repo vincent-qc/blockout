@@ -55,7 +55,7 @@ public class LockoutGameHandler {
                 Task t = grid[r][c];
                 if(t == null) continue;
 
-                LockoutPacketHandler.sendAll(new TaskPacket(getType(t), getDifficulty(t), t.getIndex(), t.getTeam(), r, c));
+                LockoutPacketHandler.sendAll(new TaskPacket(getType(t), t.getDifficulty(), t.getIndex(), t.getTeam(), r, c));
             }
         }
     }
@@ -151,14 +151,6 @@ public class LockoutGameHandler {
         else if(t instanceof CollectTask) return "collect";
         else if(t instanceof ExperienceTask) return "experience";
         else if(t instanceof OpponentTask) return "opponent";
-        return null;
-    }
-
-    private static String getDifficulty(Task t) {
-        if(t.getDifficulty() == TaskDifficulty.EASY) return "easy";
-        else if(t.getDifficulty() == TaskDifficulty.MEDIUM) return "medium";
-        else if(t.getDifficulty() == TaskDifficulty.HARD) return "hard";
-        else if(t.getDifficulty() == TaskDifficulty.EXPERT) return "expert";
         return null;
     }
 

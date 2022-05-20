@@ -27,19 +27,16 @@ public class OpponentTask extends Task {
         this.title = "Opponent obtains " + new ItemStack(item).getHoverName().getString();
     }
 
-    public OpponentTask(String difficulty, int index) {
+    public OpponentTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
-        this.index = index;
 
-        if(difficulty.equals("medium")) {
-            this.item = OpponentList.MEDIUM_ITEMS[index];
-            this.difficulty = TaskDifficulty.MEDIUM;
-        } else {
-            this.item = OpponentList.HARD_ITEMS[index];
-            this.difficulty = TaskDifficulty.HARD;
-        }
+        // Assign Random Item
+        Random r = new Random();
+        Item[] data = list.get(difficulty);
 
-        title = "Opponent obtains " + new ItemStack(item).getHoverName().getString();
+        this.index = r.nextInt(data.length);
+        this.item = data[index];
+        this.title = "Opponent obtains " + new ItemStack(item).getHoverName().getString();
     }
 
     @Override

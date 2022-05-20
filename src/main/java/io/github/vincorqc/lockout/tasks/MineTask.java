@@ -28,22 +28,14 @@ public class MineTask extends Task {
         this.title = "Mine " + block.getName().getString();
     }
 
-    public MineTask(String difficulty, int index) {
+    public MineTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
+
+        Block[] data = list.get(difficulty);
+
         this.index = index;
-
-        if(difficulty.equals("easy")) {
-            this.block = BlockList.EASY_BLOCKS[index];
-            this.difficulty = TaskDifficulty.EASY;
-        } else if(difficulty.equals("medium")) {
-            this.block = BlockList.MEDIUM_BLOCKS[index];
-            this.difficulty = TaskDifficulty.MEDIUM;
-        } else {
-            this.block = BlockList.HARD_BLOCKS[index];
-            this.difficulty = TaskDifficulty.HARD;
-        }
-
-        title = "Mine " + block.getName().getString();
+        this.block = data[index];
+        this.title = "Mine " + block.getName().getString();
     }
 
     @Override
