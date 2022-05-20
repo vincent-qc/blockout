@@ -19,13 +19,14 @@ public class DamageList {
             DamageSource.FALLING_STALACTITE,
             DamageSource.MAGIC,
             DamageSource.WITHER,
-            DamageSource.STARVE
+            DamageSource.STARVE,
     };
 
     public static DamageSource[] HARD_DAMAGE = {
             DamageSource.CRAMMING,
             DamageSource.OUT_OF_WORLD,
             DamageSource.DRAGON_BREATH,
+            DamageSource.FREEZE,
     };
 
     public static Item[] EASY_ICONS =  {
@@ -34,7 +35,7 @@ public class DamageList {
             Items.MAGMA_BLOCK,
             Items.LAVA_BUCKET,
             Items.SWEET_BERRIES,
-            Items.SAND
+            Items.SAND,
     };
 
     public static Item[] MEDIUM_ICONS =  {
@@ -48,7 +49,8 @@ public class DamageList {
     public static Item[] HARD_ICONS = {
             Items.SKELETON_SKULL,
             Items.END_PORTAL_FRAME,
-            Items.DRAGON_BREATH
+            Items.DRAGON_BREATH,
+            Items.POWDER_SNOW_BUCKET
     };
 
     public static String[] EASY_TITLES = {
@@ -71,6 +73,7 @@ public class DamageList {
     public static String[] HARD_TITLES = {
             "Die from entity cramming",
             "Jump into the void",
-            "Die from dragon's breath"
+            "Die from dragon's breath",
+            "Freeze to death"
     };
 }

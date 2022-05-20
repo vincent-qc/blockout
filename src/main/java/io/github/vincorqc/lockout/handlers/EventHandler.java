@@ -60,7 +60,9 @@ public class EventHandler {
         }
 
         if(event.getSource().getEntity() instanceof Player p) {
-            VerificationHandler.validateKill(p, event.getEntity().getName().getString());
+            // Check if entity killed is another player
+            String name = event.getEntity() instanceof Player ? "Player" : event.getEntity().getName().getString();
+            VerificationHandler.validateKill(p, name);
         }
     }
 

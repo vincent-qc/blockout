@@ -43,7 +43,8 @@ public class MobList {
             "Endermite",
             "Mule",
             "Panda",
-            "Polar Bear"
+            "Polar Bear",
+            "Player"
     };
 
     public static final String[] EXPERT_MOBS = {
@@ -91,7 +92,8 @@ public class MobList {
             Items.ENDERMITE_SPAWN_EGG,
             Items.MULE_SPAWN_EGG,
             Items.PANDA_SPAWN_EGG,
-            Items.POLAR_BEAR_SPAWN_EGG
+            Items.POLAR_BEAR_SPAWN_EGG,
+            Items.PLAYER_HEAD
     };
 
     public static final Item[] EXPERT_ICONS = {
