@@ -10,12 +10,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import org.checkerframework.checker.units.qual.A;
-import org.lwjgl.system.CallbackI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class TeamHandler {
     private static final HashMap<String, Integer> playerTeams = new HashMap<>();
@@ -24,13 +20,13 @@ public class TeamHandler {
     public static void addPlayer(Player p) {
         if(playerTeams.containsKey(p.getName().getString())) return;
 
-        playerTeams.put(p.getName().getString(), -1);
+        playerTeams.put(p.getName().getString(), 0);
     }
 
     public static void addPlayer(String p) {
         if(playerTeams.containsKey(p)) return;
 
-        playerTeams.put(p, -1);
+        playerTeams.put(p, 0);
     }
 
     public static void setTeam(Player p, int team) {
@@ -40,7 +36,7 @@ public class TeamHandler {
             addPlayer(p);
         }
 
-        if(team == -1) return;
+        if(team < 1) return;
         if(!teamScores.containsKey(team)) teamScores.put(team, 0);
     }
 

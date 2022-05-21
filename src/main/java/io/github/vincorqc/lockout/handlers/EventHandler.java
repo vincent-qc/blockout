@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class EventHandler {
@@ -101,11 +102,10 @@ public class EventHandler {
      * @param event Activates when a player joins the world
      */
     @SubscribeEvent
-    @OnlyIn(Dist.DEDICATED_SERVER)
     public void playerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         TeamHandler.addPlayer(event.getPlayer());
-        TeamHandler.setTeam(event.getPlayer(), 1);
 
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> LockoutGameHandler::reset);
         LockoutPacketHandler.sync();
     }
 

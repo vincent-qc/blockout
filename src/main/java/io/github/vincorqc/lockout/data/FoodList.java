@@ -7,7 +7,7 @@ public class FoodList {
     public static final Item[] EASY_FOOD = {
             Items.APPLE,
             Items.CARROT,
-            Items.MELON,
+            Items.MELON_SLICE,
             Items.POTATO,
             Items.DRIED_KELP,
             Items.COOKED_RABBIT,

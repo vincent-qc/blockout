@@ -13,9 +13,10 @@ public class VerificationHandler extends LockoutGameHandler {
         for(int i = 0; i < obtainTasks.size(); i++) {
             ObtainTask task = obtainTasks.get(i);
             if(p.getInventory().contains(new ItemStack(task.getItem()))) {
-                task.complete(p);
-                obtainTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    obtainTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -24,9 +25,10 @@ public class VerificationHandler extends LockoutGameHandler {
         for(int i = 0; i < advancementTasks.size(); i++) {
             AdvancementTask task = advancementTasks.get(i);
             if(task.getAdvancement().equals(advancement)) {
-                task.complete(p);
-                advancementTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    advancementTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -36,9 +38,10 @@ public class VerificationHandler extends LockoutGameHandler {
             KillTask task = killTasks.get(i);
 
             if(task.getMob().equals(mob)) {
-                task.complete(p);
-                killTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    killTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -49,9 +52,10 @@ public class VerificationHandler extends LockoutGameHandler {
             EffectTask task = effectTasks.get(i);
 
             if(p.hasEffect(task.getEffect())) {
-                task.complete(p);
-                effectTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    effectTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -61,9 +65,10 @@ public class VerificationHandler extends LockoutGameHandler {
             MineTask task = mineTasks.get(i);
 
             if(task.getBlock().equals(block)) {
-                task.complete(p);
-                mineTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    mineTasks.remove(task);
+                    i--;
+                }
             }
         }
 
@@ -74,9 +79,10 @@ public class VerificationHandler extends LockoutGameHandler {
             DeathTask task = deathTasks.get(i);
 
             if(task.getDamageSource().equals(damage)) {
-                task.complete(p);
-                deathTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    deathTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -91,9 +97,10 @@ public class VerificationHandler extends LockoutGameHandler {
             }
 
             if(complete) {
-                task.complete(p);
-                collectTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    collectTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -103,9 +110,10 @@ public class VerificationHandler extends LockoutGameHandler {
             ExperienceTask task = experienceTasks.get(i);
 
             if(level >= task.getLevel()) {
-                task.complete(p);
-                experienceTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    experienceTasks.remove(task);
+                    i--;
+                }
             }
         }
     }
@@ -114,13 +122,11 @@ public class VerificationHandler extends LockoutGameHandler {
         for(int i = 0; i < opponentTasks.size(); i++) {
             OpponentTask task = opponentTasks.get(i);
             if(p.getInventory().contains(new ItemStack(task.getItem()))) {
-                try {
-                    int t = TeamHandler.getTeam(p) == 1 ? 2 : 1;
-                    task.complete(t);
+                int t = TeamHandler.getTeam(p) == 1 ? 2 : 1;
+
+                if(task.complete(t)) {
                     opponentTasks.remove(task);
                     i--;
-                } catch (Exception e) {
-                    LockoutMod.LOGGER.info(String.valueOf(e));
                 }
             }
         }
@@ -132,9 +138,10 @@ public class VerificationHandler extends LockoutGameHandler {
 
 
             if(task.getItem().equals(food)) {
-                task.complete(p);
-                eatTasks.remove(task);
-                i--;
+                if(task.complete(p)) {
+                    eatTasks.remove(task);
+                    i--;
+                }
             }
         }
     }

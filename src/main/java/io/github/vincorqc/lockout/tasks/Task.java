@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class Task {
     protected HashMap<String, String> titles = new HashMap<>();
     protected TaskDifficulty difficulty;
-    protected int team = -1;
+    protected int team = 0;
     protected String title;
     protected int index;
     protected Item icon;
@@ -26,29 +26,35 @@ public class Task {
         this.difficulty = difficulty;
     }
 
-    public void complete(Player p) {
-        if (!LockoutGameHandler.getGameStarted()) return;
+    public boolean complete(Player p) {
+        if (!LockoutGameHandler.getGameStarted()) return false;
+        int pTeam = TeamHandler.getTeam(p);
 
-        if (team == -1) {
-            team = TeamHandler.getTeam(p);
+        if (team < 1 && pTeam > 0) {
+            team = pTeam;
 
             sendAnnouncement();
             TeamHandler.incrementScore(team);
             LockoutPacketHandler.sync();
-
+            return true;
         }
+
+        return false;
     }
 
-    public void complete(int t) {
-        if (!LockoutGameHandler.getGameStarted()) return;
+    public boolean complete(int t) {
+        if (!LockoutGameHandler.getGameStarted()) return false;
 
-        if (team == -1) {
+        if (team < 1 && t > 0) {
             team = t;
 
             sendAnnouncement();
             TeamHandler.incrementScore(team);
             LockoutPacketHandler.sync();
+            return true;
         }
+
+        return false;
     }
 
     public String getTitle() {

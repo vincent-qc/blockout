@@ -68,7 +68,7 @@ public class LockoutScreen extends Screen {
             yPos = (Minecraft.getInstance().screen.height / 2) - 60;
         }
 
-        blit(stack, xPos, yPos, 0, 0, 104, 120);
+        blit(stack, xPos, yPos, 0, 0, 104, 136);
 
         Task[][] grid = LockoutGameHandler.grid;
         for(int r = 0 ; r < grid.length; r++) {
@@ -89,6 +89,12 @@ public class LockoutScreen extends Screen {
         font.draw(stack, fTOneScore, xPos + (52 - 15), yPos + 10, 0xF04040);
         font.draw(stack, "-", xPos + 52, yPos + 10, 0xFFFFFF);
         font.draw(stack, fTTwoScore, xPos + (52 + 9), yPos + 10, 0x4080F0);
+
+        assert Minecraft.getInstance().player != null;
+        int team = TeamHandler.getTeam(Minecraft.getInstance().player);
+        String text = team > 0 ? "You are Team " + team : "You have no team";
+        drawCenteredString(stack, font, text, xPos + 52, yPos + 118, 0xFFFFFF);
+
     }
 
 

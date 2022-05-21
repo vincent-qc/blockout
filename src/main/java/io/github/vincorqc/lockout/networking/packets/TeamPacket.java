@@ -3,12 +3,15 @@ package io.github.vincorqc.lockout.networking.packets;
 import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.TeamHandler;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.locks.Lock;
 import java.util.function.Supplier;
 
 public class TeamPacket {
@@ -33,7 +36,7 @@ public class TeamPacket {
         public static void handle(TeamPacket msg, Supplier<NetworkEvent.Context> ctx){
             ctx.get().enqueueWork( ()-> {
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                    if(LockoutMod.server != null) TeamHandler.setTeam(msg.name, msg.team);
+                    TeamHandler.setTeam(msg.name, msg.team);
                 });
             });
 

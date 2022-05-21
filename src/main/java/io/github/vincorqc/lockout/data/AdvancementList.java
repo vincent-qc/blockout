@@ -13,7 +13,8 @@ public class AdvancementList {
             "make_a_sign_glow",
             "tactical_fishing",
             "wax_off",
-            "deflect_arrow"
+            "deflect_arrow",
+            "sleep_in_bed"
     };
 
     public static final String[] MEDIUM_ADVANCEMENTS = {
@@ -52,7 +53,8 @@ public class AdvancementList {
             Items.GLOW_INK_SAC,
             Items.TROPICAL_FISH_BUCKET,
             Items.WAXED_COPPER_BLOCK,
-            Items.SHIELD
+            Items.SHIELD,
+            Items.RED_BED
     };
 
     public static final Item[] MEDIUM_ICONS = {
@@ -91,7 +93,8 @@ public class AdvancementList {
             "Make a sign glow",
             "Fish with a bucket",
             "Unwax a waxed copper block",
-            "Use a shield"
+            "Use a shield",
+            "Sleep in a bed"
     };
 
     public static final String[] MEDIUM_TITLES = {

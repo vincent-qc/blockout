@@ -5,6 +5,7 @@ import io.github.vincorqc.lockout.networking.packets.TaskPacket;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import io.github.vincorqc.lockout.tasks.*;
 import org.checkerframework.checker.units.qual.A;
+import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +14,11 @@ public class LockoutGameHandler {
 
     private static boolean gameStarted = false;
 
-    public static final Task[][] grid = new Task[5][5];
+    private static int easyProb = 35;
+    private static int mediumProb = 75;
+    private static int hardProb = 90;
+
+    public static Task[][] grid = new Task[5][5];
 
     protected static final ArrayList<ObtainTask> obtainTasks = new ArrayList<>();
     protected static final ArrayList<AdvancementTask> advancementTasks = new ArrayList<>();
@@ -64,6 +69,16 @@ public class LockoutGameHandler {
         gameStarted = b;
     }
 
+    public static void setProbability(int easy, int medium, int hard) {
+        easyProb = easy;
+        mediumProb = medium;
+        hardProb = hard;
+    }
+
+    public static void reset() {
+        grid = new Task[5][5];
+    }
+
     public static boolean getGameStarted() {
         return gameStarted;
     }
@@ -79,7 +94,7 @@ public class LockoutGameHandler {
         Random r = new Random();
         int diff = r.nextInt(100);
 
-        if(diff < 30) {
+        if(diff < easyProb) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.EASY;
 
@@ -91,7 +106,7 @@ public class LockoutGameHandler {
             else if(type < 85) t = new MineTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < 70) {
+        } else if(diff < mediumProb) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.MEDIUM;
 
@@ -105,7 +120,7 @@ public class LockoutGameHandler {
             else if(type < 90) t = new ExperienceTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < 92) {
+        } else if(diff < hardProb) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.HARD;
 
@@ -164,7 +179,7 @@ public class LockoutGameHandler {
 
         for(Task[] r : grid) {
             for(Task t : r) {
-                res.append(t.getTitle()).append(" - TEAM: ").append(t.getTeam()).append("\n");
+                res.append(t.getTitle());
             }
         }
 

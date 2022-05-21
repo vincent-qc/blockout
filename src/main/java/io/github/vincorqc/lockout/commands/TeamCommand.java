@@ -6,7 +6,6 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.TeamHandler;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import net.minecraft.commands.CommandSource;
@@ -33,7 +32,7 @@ public class TeamCommand implements Command<CommandSourceStack> {
         dispatcher.register(Commands.literal("lockoutTeam")
                 .requires(source -> source.hasPermission(3))
                 .then(Commands.argument("target", EntityArgument.player())
-                        .then(Commands.argument("team", IntegerArgumentType.integer(1, 2))
+                        .then(Commands.argument("team", IntegerArgumentType.integer(0, 2))
                                 .executes(new TeamCommand()))));
     }
 
@@ -44,7 +43,8 @@ public class TeamCommand implements Command<CommandSourceStack> {
 
         TeamHandler.setTeam(p, team);
 
-        TextComponent message = new TextComponent("You have been assigned to Team " + team);
+        String text = team > 0 ? "You have been assigned to Team " + team : "You have been set to no team";
+        TextComponent message = new TextComponent(text);
         p.sendMessage(message, p.getUUID());
 
         LockoutPacketHandler.sync();
