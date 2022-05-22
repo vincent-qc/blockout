@@ -126,7 +126,7 @@ public class LockoutGameHandler {
             TaskDifficulty d = TaskDifficulty.EASY;
 
             if(type < 20) t = new AdvancementTask(d);
-            if(type < 30) t = new EatTask(d);
+            if(type < 28) t = new EatTask(d);
             else if(type < 45) t = new ObtainTask(d);
             else if(type < 55) t = new KillTask(d);
             else if(type < 70) t = new EffectTask(d);
@@ -183,10 +183,12 @@ public class LockoutGameHandler {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.EXPERT;
 
-            if(type < 25) t = new AdvancementTask(d);
-            else if(type < 50) t = new ObtainTask(d);
-            else if(type < 75) t = new KillTask(d);
-            else if(type < 100) t = new CollectTask(d);
+            if(type < 20) t = new AdvancementTask(d);
+            else if(type < 40) t = new ObtainTask(d);
+            else if(type < 60) t = new KillTask(d);
+            else if(type < 80) t = new CollectTask(d);
+            else if(type < 90) t = new MineTask(d);
+            else if(type < 100) t = new DeathTask(d);
 
             if(!usedTasks.contains(t.getTitle())) expert--;
         }

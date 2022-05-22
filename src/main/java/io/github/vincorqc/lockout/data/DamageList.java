@@ -3,80 +3,40 @@ package io.github.vincorqc.lockout.data;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import oshi.util.tuples.Triplet;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+
 
 public class DamageList {
-    public static DamageSource[] EASY_DAMAGE = {
-            DamageSource.IN_FIRE,
-            DamageSource.DROWN,
-            DamageSource.HOT_FLOOR,
-            DamageSource.LAVA,
-            DamageSource.SWEET_BERRY_BUSH,
-            DamageSource.IN_WALL,
-            DamageSource.CACTUS
-    };
+    public static final Map<TaskDifficulty, ArrayList<Triplet<DamageSource, Item, String>>> list = Map.ofEntries(
+            Map.entry(TaskDifficulty.EASY, new ArrayList<>(Arrays.asList(
+                    new Triplet<>(DamageSource.IN_FIRE, Items.FLINT_AND_STEEL, "Burn to death"),
+                    new Triplet<>(DamageSource.HOT_FLOOR, Items.MAGMA_BLOCK, "Die by magma cube"),
+                    new Triplet<>(DamageSource.LAVA, Items.LAVA_BUCKET, "Swim in lava"),
+                    new Triplet<>(DamageSource.SWEET_BERRY_BUSH, Items.SWEET_BERRIES, "Get pricked to death by sweetberries"),
+                    new Triplet<>(DamageSource.IN_WALL, Items.SAND, "Suffocate to death"),
+                    new Triplet<>(DamageSource.CACTUS, Items.CACTUS, "Get pricked to death by cactus")
+            ))),
 
-    public static DamageSource[] MEDIUM_DAMAGE = {
-            DamageSource.ANVIL,
-            DamageSource.FALLING_STALACTITE,
-            DamageSource.MAGIC,
-            DamageSource.WITHER,
-            DamageSource.STARVE,
-    };
+            Map.entry(TaskDifficulty.MEDIUM, new ArrayList<>(Arrays.asList(
+                    new Triplet<>(DamageSource.FALLING_STALACTITE, Items.POINTED_DRIPSTONE, "Die from falling dripstone"),
+                    new Triplet<>(DamageSource.MAGIC, Items.SPLASH_POTION, "Die by magic"),
+                    new Triplet<>(DamageSource.WITHER, Items.WITHER_ROSE, "Wither to death"),
+                    new Triplet<>(DamageSource.STARVE, Items.BREAD, "Starve to death")
+            ))),
 
-    public static DamageSource[] HARD_DAMAGE = {
-            DamageSource.CRAMMING,
-            DamageSource.OUT_OF_WORLD,
-            DamageSource.DRAGON_BREATH,
-            DamageSource.FREEZE,
-    };
+            Map.entry(TaskDifficulty.HARD, new ArrayList<>(Arrays.asList(
+                    new Triplet<>(DamageSource.CRAMMING, Items.SKELETON_SKULL, "Die from entity cramming"),
+                    new Triplet<>(DamageSource.ANVIL, Items.ANVIL, "Get squashed by an anvil"),
+                    new Triplet<>(DamageSource.FREEZE, Items.POWDER_SNOW_BUCKET, "Freeze to death")
+            ))),
 
-    public static Item[] EASY_ICONS =  {
-            Items.FLINT_AND_STEEL,
-            Items.WATER_BUCKET,
-            Items.MAGMA_BLOCK,
-            Items.LAVA_BUCKET,
-            Items.SWEET_BERRIES,
-            Items.SAND,
-            Items.CACTUS
-    };
-
-    public static Item[] MEDIUM_ICONS =  {
-            Items.ANVIL,
-            Items.POINTED_DRIPSTONE,
-            Items.SPLASH_POTION,
-            Items.WITHER_SKELETON_SKULL,
-            Items.BREAD
-    };
-
-    public static Item[] HARD_ICONS = {
-            Items.SKELETON_SKULL,
-            Items.END_PORTAL_FRAME,
-            Items.DRAGON_BREATH,
-            Items.POWDER_SNOW_BUCKET
-    };
-
-    public static String[] EASY_TITLES = {
-            "Burn to death",
-            "Drown to death",
-            "Die by magma block",
-            "Swim in lava",
-            "Get pricked to death by sweetberries",
-            "Suffocate to death",
-            "Get pricked to death by a cactus"
-    };
-
-    public static String[] MEDIUM_TITLES = {
-            "Die from falling anvil",
-            "Die from falling stalactite",
-            "Die from magic",
-            "Wither to death",
-            "Starve to death",
-    };
-
-    public static String[] HARD_TITLES = {
-            "Die from entity cramming",
-            "Jump into the void",
-            "Die from dragon's breath",
-            "Freeze to death"
-    };
+            Map.entry(TaskDifficulty.EXPERT, new ArrayList<>(Arrays.asList(
+                    new Triplet<>(DamageSource.DRAGON_BREATH, Items.DRAGON_BREATH, "Die from dragon's breath"),
+                    new Triplet<>(DamageSource.OUT_OF_WORLD, Items.END_PORTAL_FRAME, "Jump into the void")
+            )))
+    );
 }

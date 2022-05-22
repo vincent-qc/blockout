@@ -1,5 +1,6 @@
 package io.github.vincorqc.lockout.tasks;
 
+import io.github.vincorqc.lockout.data.CollectList;
 import io.github.vincorqc.lockout.data.EffectList;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.util.Tuple;
@@ -7,37 +8,36 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
 public class EffectTask extends Task {
     private final MobEffect effect;
-    private static final Map<TaskDifficulty, Tuple<MobEffect[], Item[]>> list = Map.ofEntries(
-            Map.entry(TaskDifficulty.EASY, new Tuple<>(EffectList.EASY_EFFECTS, EffectList.EASY_ICONS)),
-            Map.entry(TaskDifficulty.MEDIUM, new Tuple<>(EffectList.MEDIUM_EFFECTS, EffectList.MEDIUM_ICONS))
-    );
 
     public EffectTask(TaskDifficulty difficulty) {
         super(difficulty);
 
         // Assign Random Item
         Random r = new Random();
-        Tuple<MobEffect[], Item[]> data = list.get(difficulty);
+        ArrayList<Tuple<MobEffect, Item>> data = EffectList.list.get(difficulty);
+        this.index = r.nextInt(data.size());
+        Tuple<MobEffect, Item> temp = data.get(index);
 
-        this.index = r.nextInt(data.getA().length);
-        this.effect = data.getA()[index];
-        this.icon = data.getB()[index];
+        this.effect= temp.getA();
+        this.icon = temp.getB();
         this.title = "Obtain " + effect.getDisplayName().getString();
     }
 
     public EffectTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
-        ;
-        Tuple<MobEffect[], Item[]> data = list.get(difficulty);
 
+        ArrayList<Tuple<MobEffect, Item>> data = EffectList.list.get(difficulty);
         this.index = index;
-        this.effect = data.getA()[index];
-        this.icon = data.getB()[index];
+        Tuple<MobEffect, Item> temp = data.get(index);
+
+        this.effect= temp.getA();
+        this.icon = temp.getB();
         this.title = "Obtain " + effect.getDisplayName().getString();
     }
 

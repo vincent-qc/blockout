@@ -1,48 +1,35 @@
 package io.github.vincorqc.lockout.data;
 
+import net.minecraft.util.Tuple;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+
 public class EffectList {
-    public static final MobEffect[] EASY_EFFECTS = {
-            MobEffects.JUMP,
-            MobEffects.MOVEMENT_SPEED,
-            MobEffects.NIGHT_VISION,
-            MobEffects.POISON,
-            MobEffects.WITHER,
-            MobEffects.DAMAGE_BOOST,
-            MobEffects.WEAKNESS,
-            MobEffects.DOLPHINS_GRACE,
-            MobEffects.FIRE_RESISTANCE
-    };
+    public static final Map<TaskDifficulty, ArrayList<Tuple<MobEffect, Item>>> list = Map.ofEntries(
+            Map.entry(TaskDifficulty.EASY, new ArrayList<>(Arrays.asList(
+                    new Tuple<>(MobEffects.JUMP, Items.RABBIT_FOOT),
+                    new Tuple<>(MobEffects.MOVEMENT_SPEED, Items.SUGAR),
+                    new Tuple<>(MobEffects.NIGHT_VISION, Items.ENDER_EYE),
+                    new Tuple<>(MobEffects.POISON, Items.SPIDER_EYE),
+                    new Tuple<>(MobEffects.WITHER, Items.WITHER_ROSE),
+                    new Tuple<>(MobEffects.DAMAGE_BOOST, Items.BLAZE_POWDER),
+                    new Tuple<>(MobEffects.WEAKNESS, Items.FERMENTED_SPIDER_EYE),
+                    new Tuple<>(MobEffects.DOLPHINS_GRACE, Items.HEART_OF_THE_SEA),
+                    new Tuple<>(MobEffects.FIRE_RESISTANCE, Items.MAGMA_CREAM)
+            ))),
 
-    public static final MobEffect[] MEDIUM_EFFECTS = {
-            MobEffects.ABSORPTION,
-            MobEffects.GLOWING,
-            MobEffects.BLINDNESS,
-            MobEffects.CONFUSION,
-            MobEffects.DAMAGE_RESISTANCE
-    };
-
-    public static final Item[] EASY_ICONS = {
-            Items.RABBIT_FOOT,
-            Items.SUGAR,
-            Items.ENDER_EYE,
-            Items.SPIDER_EYE,
-            Items.WITHER_ROSE,
-            Items.BLAZE_POWDER,
-            Items.FERMENTED_SPIDER_EYE,
-            Items.HEART_OF_THE_SEA,
-            Items.MAGMA_CREAM
-    };
-
-    public static final Item[] MEDIUM_ICONS = {
-            Items.GOLDEN_APPLE,
-            Items.GLOWSTONE_DUST,
-            Items.ENDER_PEARL,
-            Items.PUFFERFISH,
-            Items.SCUTE
-    };
+            Map.entry(TaskDifficulty.MEDIUM, new ArrayList<>(Arrays.asList(
+                    new Tuple<>(MobEffects.ABSORPTION, Items.GOLDEN_APPLE),
+                    new Tuple<>(MobEffects.GLOWING, Items.GLOWSTONE_DUST),
+                    new Tuple<>(MobEffects.BLINDNESS, Items.ENDER_PEARL),
+                    new Tuple<>(MobEffects.CONFUSION, Items.PUFFERFISH),
+                    new Tuple<>(MobEffects.DAMAGE_RESISTANCE, Items.SCUTE)
+            )))
+    );
 }

@@ -1,108 +1,67 @@
 package io.github.vincorqc.lockout.data;
 
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import oshi.util.tuples.Triplet;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MobList {
-    public static final String[] EASY_MOBS = {
-            "Pig",
-            "Cow",
-            "Sheep",
-            "Creeper",
-            "Zombie",
-            "Skeleton",
-            "Spider",
-            "Blaze",
-            "Wither Skeleton",
-            "Ghast",
-            "Strider",
-            "Piglin",
-            "Turtle",
-            "Zombified Piglin"
-    };
+    public static final Map<TaskDifficulty, ArrayList<Tuple<String, Item>>> list = Map.ofEntries(
+            Map.entry(TaskDifficulty.EASY, new ArrayList<>(Arrays.asList(
+                    new Tuple<>("Pig", Items.PIG_SPAWN_EGG),
+                    new Tuple<>("Cow", Items.COW_SPAWN_EGG),
+                    new Tuple<>("Sheep", Items.SHEEP_SPAWN_EGG),
+                    new Tuple<>("Creeper", Items.CREEPER_SPAWN_EGG),
+                    new Tuple<>("Zombie", Items.ZOMBIE_SPAWN_EGG),
+                    new Tuple<>("Skeleton", Items.SKELETON_SPAWN_EGG),
+                    new Tuple<>("Spider", Items.SPIDER_SPAWN_EGG),
+                    new Tuple<>("Turtle", Items.TURTLE_SPAWN_EGG),
+                    new Tuple<>("Piglin", Items.PIGLIN_SPAWN_EGG)
+            ))),
 
-    public static final String[] MEDIUM_MOBS = {
-            "Bat",
-            "Fox",
-            "Horse",
-            "Donkey",
-            "Glow Squid",
-            "Parrot",
-            "Ocelot",
-            "Snow Golem",
-            "Zombie Villager",
-            "Dolphin",
-            "Piglin Brute",
-            "Witch",
-            "Llama",
-            "Iron Golem",
-    };
+            Map.entry(TaskDifficulty.MEDIUM, new ArrayList<>(Arrays.asList(
+                    new Tuple<>("Blaze", Items.BLAZE_SPAWN_EGG),
+                    new Tuple<>("Wither Skeleton", Items.WITHER_SKELETON_SPAWN_EGG),
+                    new Tuple<>("Ghast", Items.GHAST_SPAWN_EGG),
+                    new Tuple<>("Stider", Items.STRIDER_SPAWN_EGG),
+                    new Tuple<>("Zombified Piglin", Items.ZOMBIFIED_PIGLIN_SPAWN_EGG),
+                    new Tuple<>("Bat", Items.BAT_SPAWN_EGG),
+                    new Tuple<>("Fox", Items.FOX_SPAWN_EGG),
+                    new Tuple<>("Horse", Items.HORSE_SPAWN_EGG),
+                    new Tuple<>("Donkey", Items.DONKEY_SPAWN_EGG),
+                    new Tuple<>("Glow Squid", Items.GLOW_SQUID_SPAWN_EGG),
+                    new Tuple<>("Parrot", Items.PARROT_SPAWN_EGG),
+                    new Tuple<>("Snow Golem", Items.SNOW_BLOCK),
+                    new Tuple<>("Zombie Villager", Items.ZOMBIE_VILLAGER_SPAWN_EGG),
+                    new Tuple<>("Dolphin", Items.DOLPHIN_SPAWN_EGG),
+                    new Tuple<>("Witch", Items.WITCH_SPAWN_EGG),
+                    new Tuple<>("Llama", Items.LLAMA_SPAWN_EGG),
+                    new Tuple<>("Iron Golem", Items.CARVED_PUMPKIN)
+            ))),
 
-    public static final String[] HARD_MOBS = {
-            "Slime",
-            "Polar Bear",
-            "Player",
-            "Guardian",
-            "Silverfish",
-    };
+            Map.entry(TaskDifficulty.HARD, new ArrayList<>(Arrays.asList(
+                    new Tuple<>("Ocelot", Items.OCELOT_SPAWN_EGG),
+                    new Tuple<>("Slime", Items.SLIME_SPAWN_EGG),
+                    new Tuple<>("Polar Bear", Items.POLAR_BEAR_SPAWN_EGG),
+                    new Tuple<>("Player", Items.PLAYER_HEAD),
+                    new Tuple<>("Guardian", Items.GUARDIAN_SPAWN_EGG)
+            ))),
 
-    public static final String[] EXPERT_MOBS = {
-            "Zoglin",
-            "Pillager",
-            "Panda",
-            "Mule",
-            "Shulker",
-            "Endermite",
-    };
-
-    public static final Item[] EASY_ICONS = {
-            Items.PIG_SPAWN_EGG,
-            Items.COW_SPAWN_EGG,
-            Items.SHEEP_SPAWN_EGG,
-            Items.CREEPER_SPAWN_EGG,
-            Items.ZOMBIE_SPAWN_EGG,
-            Items.SKELETON_SPAWN_EGG,
-            Items.SPIDER_SPAWN_EGG,
-            Items.BLAZE_SPAWN_EGG,
-            Items.WITHER_SKELETON_SPAWN_EGG,
-            Items.GHAST_SPAWN_EGG,
-            Items.STRIDER_SPAWN_EGG,
-            Items.PIGLIN_SPAWN_EGG,
-            Items.TURTLE_SPAWN_EGG,
-            Items.ZOMBIFIED_PIGLIN_SPAWN_EGG
-    };
-
-    public static final Item[] MEDIUM_ICONS = {
-            Items.BAT_SPAWN_EGG,
-            Items.FOX_SPAWN_EGG,
-            Items.HORSE_SPAWN_EGG,
-            Items.DONKEY_SPAWN_EGG,
-            Items.GLOW_SQUID_SPAWN_EGG,
-            Items.PARROT_SPAWN_EGG,
-            Items.OCELOT_SPAWN_EGG,
-            Items.SNOW_BLOCK,
-            Items.ZOMBIE_VILLAGER_SPAWN_EGG,
-            Items.DOLPHIN_SPAWN_EGG,
-            Items.PIGLIN_BRUTE_SPAWN_EGG,
-            Items.WITCH_SPAWN_EGG,
-            Items.LLAMA_SPAWN_EGG,
-            Items.CARVED_PUMPKIN,
-    };
-
-    public static final Item[] HARD_ICONS = {
-            Items.SLIME_SPAWN_EGG,
-            Items.POLAR_BEAR_SPAWN_EGG,
-            Items.PLAYER_HEAD,
-            Items.GUARDIAN_SPAWN_EGG,
-            Items.SILVERFISH_SPAWN_EGG,
-    };
-
-    public static final Item[] EXPERT_ICONS = {
-            Items.ZOGLIN_SPAWN_EGG,
-            Items.PILLAGER_SPAWN_EGG,
-            Items.PANDA_SPAWN_EGG,
-            Items.MULE_SPAWN_EGG,
-            Items.SHULKER_SPAWN_EGG,
-            Items.ENDERMITE_SPAWN_EGG,
-    };
+            Map.entry(TaskDifficulty.EXPERT, new ArrayList<>(Arrays.asList(
+                    new Tuple<>("Piglin Brute", Items.PIGLIN_BRUTE_SPAWN_EGG),
+                    new Tuple<>("Silverfish", Items.SILVERFISH_SPAWN_EGG),
+                    new Tuple<>("Zoglin", Items.ZOGLIN_SPAWN_EGG),
+                    new Tuple<>("Pillager", Items.PILLAGER_SPAWN_EGG),
+                    new Tuple<>("Panda", Items.PANDA_SPAWN_EGG),
+                    new Tuple<>("Mule", Items.MULE_SPAWN_EGG),
+                    new Tuple<>("Shulker", Items.SHULKER_SPAWN_EGG),
+                    new Tuple<>("Endermite", Items.ENDERMITE_SPAWN_EGG)
+            )))
+    );
 }

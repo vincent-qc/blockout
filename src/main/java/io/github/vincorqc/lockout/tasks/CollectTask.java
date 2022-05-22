@@ -1,40 +1,42 @@
 package io.github.vincorqc.lockout.tasks;
 
+import io.github.vincorqc.lockout.data.AdvancementList;
 import io.github.vincorqc.lockout.data.CollectList;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import oshi.util.tuples.Triplet;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
 public class CollectTask extends Task {
     private final Item[] collection;
-    private static final Map<TaskDifficulty, Tuple<Item[][], String[]>> list = Map.ofEntries(
-            Map.entry(TaskDifficulty.HARD, new Tuple<>(CollectList.HARD_COLLECT, CollectList.HARD_TITLES)),
-            Map.entry(TaskDifficulty.EXPERT, new Tuple<>(CollectList.EXPERT_COLLECT, CollectList.EXPERT_TITLES))
-    );
 
     public CollectTask(TaskDifficulty difficulty) {
         super(difficulty);
 
         // Assign Random Item
         Random r = new Random();
-        Tuple<Item[][], String[]> data = list.get(difficulty);
+        ArrayList<Tuple<ArrayList<Item>, String>> data = CollectList.list.get(difficulty);
+        this.index = r.nextInt(data.size());
 
-        this.index = r.nextInt(data.getA().length);
-        this.collection = data.getA()[index];
-        this.title = data.getB()[index];
+        Tuple<ArrayList<Item>, String> temp = data.get(index);
+        this.collection = temp.getA().toArray(new Item[0]);
+        this.title = temp.getB();
     }
 
     public CollectTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
 
-        Tuple<Item[][], String[]> data = list.get(difficulty);
+        ArrayList<Tuple<ArrayList<Item>, String>> data = CollectList.list.get(difficulty);
         this.index = index;
-        this.collection = data.getA()[index];
-        this.title = data.getB()[index];
+
+        Tuple<ArrayList<Item>, String> temp = data.get(index);
+        this.collection = temp.getA().toArray(new Item[0]);
+        this.title = temp.getB();
     }
 
 

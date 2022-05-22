@@ -1,5 +1,6 @@
 package io.github.vincorqc.lockout.tasks;
 
+import io.github.vincorqc.lockout.data.AdvancementList;
 import io.github.vincorqc.lockout.data.DamageList;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -7,39 +8,37 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import oshi.util.tuples.Triplet;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
 public class DeathTask extends Task {
     private final DamageSource damageSource;
-    private static final Map<TaskDifficulty, Triplet<DamageSource[], Item[], String[]>> list = Map.ofEntries(
-            Map.entry(TaskDifficulty.EASY, new Triplet<>(DamageList.EASY_DAMAGE, DamageList.EASY_ICONS, DamageList.EASY_TITLES)),
-            Map.entry(TaskDifficulty.MEDIUM, new Triplet<>(DamageList.MEDIUM_DAMAGE, DamageList.MEDIUM_ICONS, DamageList.MEDIUM_TITLES)),
-            Map.entry(TaskDifficulty.HARD, new Triplet<>(DamageList.HARD_DAMAGE, DamageList.HARD_ICONS, DamageList.HARD_TITLES))
-    );
 
     public DeathTask(TaskDifficulty difficulty) {
         super(difficulty);
 
         // Assign Random Item
         Random r = new Random();
-        Triplet<DamageSource[], Item[], String[]> data = list.get(difficulty);
+        ArrayList<Triplet<DamageSource, Item, String>> data = DamageList.list.get(difficulty);
+        this.index = r.nextInt(data.size());
+        Triplet<DamageSource, Item, String> temp = data.get(index);
 
-        this.index = r.nextInt(data.getA().length);
-        this.damageSource = data.getA()[index];
-        this.icon = data.getB()[index];
-        this.title = data.getC()[index];
+        this.damageSource = temp.getA();
+        this.icon = temp.getB();
+        this.title = temp.getC();
     }
 
     public DeathTask(TaskDifficulty difficulty, int index) {
         super(difficulty);
 
-        Triplet<DamageSource[], Item[], String[]> data = list.get(difficulty);
-
+        ArrayList<Triplet<DamageSource, Item, String>> data = DamageList.list.get(difficulty);
         this.index = index;
-        this.damageSource = data.getA()[index];
-        this.icon = data.getB()[index];
-        this.title = data.getC()[index];
+        Triplet<DamageSource, Item, String> temp = data.get(index);
+
+        this.damageSource = temp.getA();
+        this.icon = temp.getB();
+        this.title = temp.getC();
     }
 
     public DamageSource getDamageSource() {
