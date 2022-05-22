@@ -10,6 +10,12 @@ An open source lockout mod for minecraft
 This mod is under the GNU GPL v3 license
 This mod is currently under development
 
+# What is Blockout?
+Blockout is an open source version of [Smallant's](https://www.youtube.com/c/Smallant/videos) lockout minigame.<br>
+The goal of the game is to race against another team to complete tasks.<br>
+Once a goal is completed, the other team cannot complete it.<br>
+The first team to reach 13 goals wins the game.<br>
+
 # Wiki
 Please refer to the wiki [here](https://github.com/vincor-qc/blockout/wiki)
 
