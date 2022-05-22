@@ -1,3 +1,10 @@
 # Contributing
+A guide on contributing to this project.
 
-TODO
+## How to clone this project
+
+## Project Structure
+
+## Custom Tasks
+
+## Pull Requests
