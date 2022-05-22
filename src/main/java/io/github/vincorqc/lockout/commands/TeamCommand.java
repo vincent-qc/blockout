@@ -29,7 +29,7 @@ import java.util.concurrent.locks.Lock;
 public class TeamCommand implements Command<CommandSourceStack> {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("lockoutTeam")
+        dispatcher.register(Commands.literal("blockoutTeam")
                 .requires(source -> source.hasPermission(3))
                 .then(Commands.argument("target", EntityArgument.player())
                         .then(Commands.argument("team", IntegerArgumentType.integer(0, 2))

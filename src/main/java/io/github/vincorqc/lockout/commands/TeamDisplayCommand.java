@@ -19,7 +19,7 @@ import java.util.concurrent.locks.Lock;
 
 public class TeamDisplayCommand implements Command<CommandSourceStack> {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("lockoutDisplayTeams")
+        dispatcher.register(Commands.literal("blockoutDisplayTeams")
                 .requires(source -> source.hasPermission(1))
                 .then(Commands.argument("team", IntegerArgumentType.integer(1, 2))
                                 .executes(new TeamCommand())));

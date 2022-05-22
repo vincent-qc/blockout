@@ -11,7 +11,8 @@ public class DamageList {
             DamageSource.HOT_FLOOR,
             DamageSource.LAVA,
             DamageSource.SWEET_BERRY_BUSH,
-            DamageSource.IN_WALL
+            DamageSource.IN_WALL,
+            DamageSource.CACTUS
     };
 
     public static DamageSource[] MEDIUM_DAMAGE = {
@@ -36,6 +37,7 @@ public class DamageList {
             Items.LAVA_BUCKET,
             Items.SWEET_BERRIES,
             Items.SAND,
+            Items.CACTUS
     };
 
     public static Item[] MEDIUM_ICONS =  {
@@ -60,13 +62,14 @@ public class DamageList {
             "Swim in lava",
             "Get pricked to death by sweetberries",
             "Suffocate to death",
+            "Get pricked to death by a cactus"
     };
 
     public static String[] MEDIUM_TITLES = {
             "Die from falling anvil",
-            "Die from falling Stalactite",
+            "Die from falling stalactite",
             "Die from magic",
-            "Die from wither effect",
+            "Wither to death",
             "Starve to death",
     };
 

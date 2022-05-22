@@ -5,7 +5,7 @@ import com.mojang.logging.LogUtils;
 import io.github.vincorqc.lockout.commands.DifficultyCommand;
 import io.github.vincorqc.lockout.commands.StartCommand;
 import io.github.vincorqc.lockout.commands.TeamCommand;
-import io.github.vincorqc.lockout.data.Keybinds;
+import io.github.vincorqc.lockout.util.Keybinds;
 import io.github.vincorqc.lockout.handlers.ClientHandler;
 import io.github.vincorqc.lockout.handlers.EventHandler;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;

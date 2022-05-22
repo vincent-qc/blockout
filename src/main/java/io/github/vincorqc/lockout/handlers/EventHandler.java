@@ -1,16 +1,10 @@
 package io.github.vincorqc.lockout.handlers;
 
-import io.github.vincorqc.lockout.commands.StartCommand;
-import io.github.vincorqc.lockout.gui.LockoutScreen;
-import io.github.vincorqc.lockout.data.Keybinds;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.scores.Team;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -18,7 +12,6 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class EventHandler {
 
@@ -53,11 +46,12 @@ public class EventHandler {
     @SubscribeEvent
     public void kill(LivingDeathEvent event) {
 
-        if(event.getEntity() instanceof Player p) {
-            VerificationHandler.validateDeath(p, event.getSource());
-        }
-
         if(event.getSource().getEntity() instanceof Player p) {
+            if(event.getEntity() instanceof Player &&
+                    TeamHandler.getTeam((Player) event.getEntity()) != TeamHandler.getTeam((Player) event.getSource().getEntity())) {
+                VerificationHandler.validateDeath(p, event.getSource());
+            }
+
             // Check if entity killed is another player
             String name = event.getEntity() instanceof Player ? "Player" : event.getEntity().getName().getString();
             VerificationHandler.validateKill(p, name);

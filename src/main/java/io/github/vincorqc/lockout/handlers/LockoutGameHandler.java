@@ -4,6 +4,7 @@ import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import io.github.vincorqc.lockout.networking.packets.TaskPacket;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import io.github.vincorqc.lockout.tasks.*;
+import net.minecraft.world.scores.Team;
 import org.checkerframework.checker.units.qual.A;
 import org.lwjgl.system.CallbackI;
 
@@ -14,9 +15,16 @@ public class LockoutGameHandler {
 
     private static boolean gameStarted = false;
 
-    private static int easyProb = 35;
-    private static int mediumProb = 75;
-    private static int hardProb = 90;
+
+    private static int defaultEasy = 9;
+    private static int defaultMedium = defaultEasy + 11;
+    private static int defaultHard = defaultMedium + 4;
+    private static int defaultExpert = defaultHard + 1;
+
+    private static int easy = defaultEasy;
+    private static int medium = defaultMedium;
+    private static int hard = defaultHard;
+    private static int expert = defaultExpert;
 
     public static Task[][] grid = new Task[5][5];
 
@@ -69,14 +77,33 @@ public class LockoutGameHandler {
         gameStarted = b;
     }
 
-    public static void setProbability(int easy, int medium, int hard) {
-        easyProb = easy;
-        mediumProb = medium;
-        hardProb = hard;
+    public static void setProbability(int easy, int medium, int hard, int expert) {
+        defaultEasy = easy;
+        defaultMedium = medium;
+        defaultHard = hard;
+        defaultExpert = expert;
     }
 
     public static void reset() {
         grid = new Task[5][5];
+        obtainTasks.clear();
+        advancementTasks.clear();
+        killTasks.clear();
+        effectTasks.clear();
+        mineTasks.clear();
+        deathTasks.clear();
+        collectTasks.clear();
+        experienceTasks.clear();
+        opponentTasks.clear();
+        experienceTasks.clear();
+        usedTasks.clear();
+
+        easy = defaultEasy;
+        medium = defaultMedium;
+        hard = defaultHard;
+        expert = defaultExpert;
+
+        TeamHandler.resetScores();
     }
 
     public static boolean getGameStarted() {
@@ -92,9 +119,9 @@ public class LockoutGameHandler {
         Task t = null;
 
         Random r = new Random();
-        int diff = r.nextInt(100);
+        int diff = r.nextInt(expert);
 
-        if(diff < easyProb) {
+        if(diff < easy) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.EASY;
 
@@ -106,7 +133,14 @@ public class LockoutGameHandler {
             else if(type < 85) t = new MineTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < mediumProb) {
+            if(!usedTasks.contains(t.getTitle())) {
+                easy--;
+                medium--;
+                hard--;
+                expert--;
+            }
+
+        } else if(diff < medium) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.MEDIUM;
 
@@ -116,23 +150,34 @@ public class LockoutGameHandler {
             else if(type < 50) t = new KillTask(d);
             else if(type < 65) t = new EffectTask(d);
             else if(type < 80) t = new MineTask(d);
-            else if(type < 85) t = new OpponentTask(d);
+            else if(type < 82) t = new OpponentTask(d);
             else if(type < 90) t = new ExperienceTask(d);
             else if(type < 100) t = new DeathTask(d);
 
-        } else if(diff < hardProb) {
+            if(!usedTasks.contains(t.getTitle())) {
+                medium--;
+                hard--;
+                expert--;
+            }
+
+        } else if(diff < hard) {
             int type = r.nextInt(100);
             TaskDifficulty d = TaskDifficulty.HARD;
 
-            if(type < 15) t = new AdvancementTask(d);
-            else if(type < 25) t = new ObtainTask(d);
-            else if(type < 35) t = new KillTask(d);
-            else if(type < 55) t = new CollectTask(d);
-            else if(type < 70) t = new MineTask(d);
-            else if(type < 80) t = new OpponentTask(d);
-            else if(type < 85) t = new ExperienceTask(d);
+            if(type < 18) t = new AdvancementTask(d);
+            else if(type < 32) t = new ObtainTask(d);
+            else if(type < 45) t = new KillTask(d);
+            else if(type < 60) t = new CollectTask(d);
+            else if(type < 76) t = new MineTask(d);
+            else if(type < 78) t = new OpponentTask(d);
+            else if(type < 82) t = new ExperienceTask(d);
             else if(type < 90) t = new EatTask(d);
             else if(type < 100) t = new DeathTask(d);
+
+            if(!usedTasks.contains(t.getTitle())) {
+                hard--;
+                expert--;
+            }
 
         } else {
             int type = r.nextInt(100);
@@ -142,6 +187,8 @@ public class LockoutGameHandler {
             else if(type < 50) t = new ObtainTask(d);
             else if(type < 75) t = new KillTask(d);
             else if(type < 100) t = new CollectTask(d);
+
+            if(!usedTasks.contains(t.getTitle())) expert--;
         }
 
         return t;

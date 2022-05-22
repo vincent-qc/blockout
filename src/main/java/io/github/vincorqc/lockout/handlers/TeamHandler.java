@@ -51,7 +51,7 @@ public class TeamHandler {
         if(!teamScores.containsKey(team)) teamScores.put(team, 0);
     }
 
-    public static Integer getTeam(Player p) {
+    public static int getTeam(Player p) {
         return playerTeams.get(p.getName().getString());
     }
 
@@ -86,6 +86,12 @@ public class TeamHandler {
 
     public static void setScore(int team, int score) {
         teamScores.put(team, score);
+    }
+
+    public static void resetScores() {
+        for(int team : teamScores.keySet()) {
+            teamScores.replace(team, 0);
+        }
     }
 
     public static void syncTeamData() {

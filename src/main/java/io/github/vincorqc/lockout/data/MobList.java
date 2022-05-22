@@ -22,7 +22,6 @@ public class MobList {
     };
 
     public static final String[] MEDIUM_MOBS = {
-            "Silverfish",
             "Bat",
             "Fox",
             "Horse",
@@ -35,22 +34,25 @@ public class MobList {
             "Dolphin",
             "Piglin Brute",
             "Witch",
-            "Llama"
+            "Llama",
+            "Iron Golem",
     };
 
     public static final String[] HARD_MOBS = {
-            "Shulker",
-            "Endermite",
-            "Mule",
-            "Panda",
+            "Slime",
             "Polar Bear",
-            "Player"
+            "Player",
+            "Guardian",
+            "Silverfish",
     };
 
     public static final String[] EXPERT_MOBS = {
             "Zoglin",
             "Pillager",
-            "Guardian"
+            "Panda",
+            "Mule",
+            "Shulker",
+            "Endermite",
     };
 
     public static final Item[] EASY_ICONS = {
@@ -71,7 +73,6 @@ public class MobList {
     };
 
     public static final Item[] MEDIUM_ICONS = {
-            Items.SILVERFISH_SPAWN_EGG,
             Items.BAT_SPAWN_EGG,
             Items.FOX_SPAWN_EGG,
             Items.HORSE_SPAWN_EGG,
@@ -79,26 +80,29 @@ public class MobList {
             Items.GLOW_SQUID_SPAWN_EGG,
             Items.PARROT_SPAWN_EGG,
             Items.OCELOT_SPAWN_EGG,
-            Items.CARVED_PUMPKIN,
+            Items.SNOW_BLOCK,
             Items.ZOMBIE_VILLAGER_SPAWN_EGG,
             Items.DOLPHIN_SPAWN_EGG,
             Items.PIGLIN_BRUTE_SPAWN_EGG,
             Items.WITCH_SPAWN_EGG,
-            Items.LLAMA_SPAWN_EGG
+            Items.LLAMA_SPAWN_EGG,
+            Items.CARVED_PUMPKIN,
     };
 
     public static final Item[] HARD_ICONS = {
-            Items.SHULKER_SPAWN_EGG,
-            Items.ENDERMITE_SPAWN_EGG,
-            Items.MULE_SPAWN_EGG,
-            Items.PANDA_SPAWN_EGG,
+            Items.SLIME_SPAWN_EGG,
             Items.POLAR_BEAR_SPAWN_EGG,
-            Items.PLAYER_HEAD
+            Items.PLAYER_HEAD,
+            Items.GUARDIAN_SPAWN_EGG,
+            Items.SILVERFISH_SPAWN_EGG,
     };
 
     public static final Item[] EXPERT_ICONS = {
             Items.ZOGLIN_SPAWN_EGG,
             Items.PILLAGER_SPAWN_EGG,
-            Items.GUARDIAN_SPAWN_EGG
+            Items.PANDA_SPAWN_EGG,
+            Items.MULE_SPAWN_EGG,
+            Items.SHULKER_SPAWN_EGG,
+            Items.ENDERMITE_SPAWN_EGG,
     };
 }

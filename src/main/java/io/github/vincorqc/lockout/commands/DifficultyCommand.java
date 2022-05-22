@@ -15,23 +15,37 @@ import net.minecraft.world.entity.player.Player;
 public class DifficultyCommand implements Command<CommandSourceStack> {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("lockoutDifficulty")
+        dispatcher.register(Commands.literal("blockoutDifficulty")
                 .requires(source -> source.hasPermission(3))
-                .then(Commands.argument("easy", IntegerArgumentType.integer(0, 100))
-                        .then(Commands.argument("medium", IntegerArgumentType.integer(0, 100))
-                                .then(Commands.argument("hard", IntegerArgumentType.integer(0, 100))
-                                .executes(new DifficultyCommand())))));
+                .then(Commands.argument("easy", IntegerArgumentType.integer(0, 25))
+                        .then(Commands.argument("medium", IntegerArgumentType.integer(0, 25))
+                                .then(Commands.argument("hard", IntegerArgumentType.integer(0, 25))
+                                        .then(Commands.argument("expert", IntegerArgumentType.integer(0, 21))
+                                                .executes(new DifficultyCommand()))))));
     }
 
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        int easy = IntegerArgumentType.getInteger(context, "easy");
+        int medium = IntegerArgumentType.getInteger(context, "medium") + easy;
+        int hard = IntegerArgumentType.getInteger(context, "hard") + medium;
+        int expert = IntegerArgumentType.getInteger(context, "expert") + hard;
+
+        if(expert != 25) {
+            TextComponent message = new TextComponent("The sum of the rates must be equal to 25");
+            Player p = (Player) context.getSource().getEntity();
+            p.sendMessage(message, p.getUUID());
+            return 0;
+        }
+
         LockoutGameHandler.setProbability(
-                IntegerArgumentType.getInteger(context, "easy"),
-                IntegerArgumentType.getInteger(context, "medium"),
-                IntegerArgumentType.getInteger(context, "hard")
+                easy,
+                medium,
+                hard,
+                expert
         );
 
-        TextComponent message = new TextComponent("New probabilities have been assigned");
+        TextComponent message = new TextComponent("New rates have been assigned");
         Player p = (Player) context.getSource().getEntity();
         p.sendMessage(message, p.getUUID());
 

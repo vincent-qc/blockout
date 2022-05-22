@@ -19,7 +19,6 @@ public class AdvancementList {
 
     public static final String[] MEDIUM_ADVANCEMENTS = {
             "ride_a_boat_with_a_goat",
-            "explore_nether",
             "charge_respawn_anchor",
             "ride_strider",
             "return_to_sender",
@@ -28,20 +27,20 @@ public class AdvancementList {
     };
 
     public static final String[] HARD_ADVANCEMENTS = {
-            "kill_dragon",
-            "levitate",
             "obtain_netherite_hoe",
-            "silk_touch_nest",
             "use_lodestone",
             "spyglass_at_parrot",
+            "play_jukebox_in_meadows",
+            "fall_from_world_height",
     };
 
     public static final String[] EXPERT_ADVANCEMENTS = {
-            "play_jukebox_in_meadows",
-            "fall_from_world_height",
             "ride_strider_in_overworld_lava",
             "fast_travel",
-            "respawn_dragon"
+            "kill_dragon",
+            "levitate",
+            "silk_touch_nest",
+            "explore_nether",
     };
 
     public static final Item[] EASY_ICONS = {
@@ -59,7 +58,6 @@ public class AdvancementList {
 
     public static final Item[] MEDIUM_ICONS = {
             Items.OAK_BOAT,
-            Items.NETHERITE_BOOTS,
             Items.RESPAWN_ANCHOR,
             Items.WARPED_FUNGUS_ON_A_STICK,
             Items.FIRE_CHARGE,
@@ -68,20 +66,20 @@ public class AdvancementList {
     };
 
     public static final Item[] HARD_ICONS = {
-            Items.DRAGON_HEAD,
-            Items.SHULKER_SHELL,
             Items.NETHERITE_HOE,
-            Items.BEE_NEST,
             Items.LODESTONE,
-            Items.SPYGLASS
+            Items.SPYGLASS,
+            Items.JUKEBOX,
+            Items.WATER_BUCKET,
     };
 
     public static final Item[] EXPERT_ICONS = {
-            Items.JUKEBOX,
-            Items.WATER_BUCKET,
             Items.WARPED_FUNGUS_ON_A_STICK,
             Items.FILLED_MAP,
-            Items.DRAGON_EGG
+            Items.DRAGON_HEAD,
+            Items.SHULKER_SHELL,
+            Items.BEE_NEST,
+            Items.NETHERITE_BOOTS,
     };
 
     public static final String[] EASY_TITLES = {
@@ -99,7 +97,6 @@ public class AdvancementList {
 
     public static final String[] MEDIUM_TITLES = {
             "Ride a boat with a goat",
-            "Visit all nether biomes",
             "Fill a respawn anchor to the max",
             "Ride a strider",
             "Return to sender",
@@ -108,19 +105,19 @@ public class AdvancementList {
     };
 
     public static final String[] HARD_TITLES = {
-            "Kill the ender dragon",
-            "Levitate fifty blocks",
             "Obtain a netherite hoe",
-            "Pick up a full bee nest",
             "Use a lodestone",
             "Look at a parrot with a spyglass",
+            "Play a jukebox in a meadow biome",
+            "Survive a fall from the max to min height",
     };
 
     public static final String[] EXPERT_TITLES = {
-            "Play a jukebox in a meadow biome",
-            "Survive a fall from the max to min height",
-            "Ride 50m in the overworld on a strider",
+            "Ride a strider for 50m in the overworld",
             "Complete \"Subspace Bubble\"",
-            "Respawn ender dragon"
+            "Kill the ender dragon",
+            "Levitate fifty blocks",
+            "Pick up a full bee nest",
+            "Visit all nether biomes",
     };
 }

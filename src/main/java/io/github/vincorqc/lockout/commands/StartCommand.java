@@ -14,11 +14,13 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.concurrent.locks.Lock;
+
 
 public class StartCommand implements Command<CommandSourceStack> {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("lockoutStart")
+        dispatcher.register(Commands.literal("blockoutStart")
                 .requires(source -> source.hasPermission(3))
                 .executes(new StartCommand())
         );
@@ -27,6 +29,7 @@ public class StartCommand implements Command<CommandSourceStack> {
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         LockoutGameHandler.setGameStarted(true);
+        LockoutGameHandler.reset();
         LockoutGameHandler.generateGrid();
         LockoutPacketHandler.sync();
 

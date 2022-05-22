@@ -15,8 +15,10 @@ public class BlockList {
             Blocks.AZALEA_LEAVES,
             Blocks.OBSIDIAN,
             Blocks.BASALT,
-            Blocks.RED_SAND,
-            Blocks.CRYING_OBSIDIAN
+            Blocks.CRYING_OBSIDIAN,
+            Blocks.MUSHROOM_STEM,
+            Blocks.BROWN_MUSHROOM_BLOCK,
+            Blocks.RED_MUSHROOM_BLOCK
     };
 
     public static final Block[] MEDIUM_BLOCKS = {
@@ -25,11 +27,11 @@ public class BlockList {
             Blocks.FERN,
             Blocks.SEA_PICKLE,
             Blocks.GILDED_BLACKSTONE,
-            Blocks.MELON
+            Blocks.MELON,
+            Blocks.RED_SAND,
     };
 
     public static final Block[] HARD_BLOCKS = {
-            Blocks.END_ROD,
             Blocks.SPAWNER,
             Blocks.TURTLE_EGG,
             Blocks.SPONGE
