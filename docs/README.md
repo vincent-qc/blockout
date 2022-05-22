@@ -1,7 +1,7 @@
 ![Forge Logo](assets/images/logo.svg)
 # Blockout
 
-A lockout mod for minecraft
+An open source lockout mod for minecraft
 This mod is under the GNU GPL v3 license
 This mod is currently under development
 
