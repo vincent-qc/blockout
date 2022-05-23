@@ -23,7 +23,6 @@ public class DamageList {
 
             Map.entry(TaskDifficulty.MEDIUM, new ArrayList<>(Arrays.asList(
                     new Triplet<>(DamageSource.FALLING_STALACTITE, Items.POINTED_DRIPSTONE, "Die from falling dripstone"),
-                    new Triplet<>(DamageSource.MAGIC, Items.SPLASH_POTION, "Die by magic"),
                     new Triplet<>(DamageSource.WITHER, Items.WITHER_ROSE, "Wither to death"),
                     new Triplet<>(DamageSource.STARVE, Items.BREAD, "Starve to death")
             ))),
