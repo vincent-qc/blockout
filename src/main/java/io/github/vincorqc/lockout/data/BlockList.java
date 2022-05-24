@@ -32,7 +32,8 @@ public class BlockList {
                     Blocks.FERN,
                     Blocks.SEA_PICKLE,
                     Blocks.GILDED_BLACKSTONE,
-                    Blocks.MELON
+                    Blocks.MELON,
+                    Blocks.GLOW_LICHEN
             ))),
 
             Map.entry(TaskDifficulty.HARD, new ArrayList<>(Arrays.asList(

@@ -3,6 +3,7 @@ package io.github.vincorqc.lockout.common;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.logging.LogUtils;
 import io.github.vincorqc.lockout.commands.DifficultyCommand;
+import io.github.vincorqc.lockout.commands.ResetCommand;
 import io.github.vincorqc.lockout.commands.StartCommand;
 import io.github.vincorqc.lockout.commands.TeamCommand;
 import io.github.vincorqc.lockout.util.Keybinds;
@@ -82,5 +83,6 @@ public class LockoutMod
         StartCommand.register(dispatcher);
         TeamCommand.register(dispatcher);
         DifficultyCommand.register(dispatcher);
+        ResetCommand.register(dispatcher);
     }
 }

@@ -60,6 +60,8 @@ public class TeamHandler {
             teamScores.replace(team, teamScores.get(team) + 1);
             if(teamScores.get(team) > 12) {
                 LockoutGameHandler.setGameStarted(false);
+                LockoutGameHandler.setGameWon(true);
+
                 TextComponent text = new TextComponent("Team " + team + " won!");
 
                 for(Player p : LockoutMod.server.getPlayerList().getPlayers()) {
@@ -88,9 +90,13 @@ public class TeamHandler {
         teamScores.put(team, score);
     }
 
-    public static void resetScores() {
+    public static void reset() {
         for(int team : teamScores.keySet()) {
             teamScores.replace(team, 0);
+        }
+
+        for(String p : playerTeams.keySet()) {
+            playerTeams.replace(p, 0);
         }
     }
 

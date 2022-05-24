@@ -46,15 +46,20 @@ public class EventHandler {
     @SubscribeEvent
     public void kill(LivingDeathEvent event) {
 
+        if(event.getEntity() instanceof Player) {
+            VerificationHandler.validateDeath((Player) event.getEntity(), event.getSource());
+            return;
+        }
+
+
         if(event.getSource().getEntity() instanceof Player p) {
-            if(event.getEntity() instanceof Player &&
-                    TeamHandler.getTeam((Player) event.getEntity()) != TeamHandler.getTeam((Player) event.getSource().getEntity())) {
-                VerificationHandler.validateDeath(p, event.getSource());
+            if(event.getEntity() instanceof Player && TeamHandler.getTeam((Player) event.getEntity()) != TeamHandler.getTeam((Player) event.getSource().getEntity())) {
+                VerificationHandler.validateKill(p, "Player");
+                return;
             }
 
             // Check if entity killed is another player
-            String name = event.getEntity() instanceof Player ? "Player" : event.getEntity().getName().getString();
-            VerificationHandler.validateKill(p, name);
+            VerificationHandler.validateKill(p, event.getEntity().getName().getString());
         }
     }
 

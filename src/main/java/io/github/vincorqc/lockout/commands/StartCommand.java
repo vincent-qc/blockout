@@ -28,6 +28,15 @@ public class StartCommand implements Command<CommandSourceStack> {
 
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        if(LockoutGameHandler.getGameStarted() || LockoutGameHandler.getGameWon()) {
+            TextComponent message = new TextComponent("Game is still running, please reset it first");
+
+            Player p = (Player) context.getSource().getEntity();
+            p.sendMessage(message, p.getUUID());
+
+            return 0;
+        }
+
         LockoutGameHandler.setGameStarted(true);
         LockoutGameHandler.reset();
         LockoutGameHandler.generateGrid();
