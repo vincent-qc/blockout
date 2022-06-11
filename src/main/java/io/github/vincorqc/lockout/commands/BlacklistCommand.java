@@ -2,36 +2,26 @@ package io.github.vincorqc.lockout.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
-import io.github.vincorqc.lockout.networking.packets.ResetPacket;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-public class ResetCommand implements Command<CommandSourceStack> {
+public class BlacklistCommand implements Command<CommandSourceStack> {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("blockoutReset")
+        dispatcher.register(Commands.literal("blockoutBlacklist")
                 .requires(source -> source.hasPermission(3))
-                .executes(new ResetCommand())
-        );
+                .then(Commands.literal("add"))
+                .then(Commands.literal("remove")));
     }
 
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-
-        LockoutGameHandler.reset();
-        LockoutPacketHandler.sendAll(new ResetPacket());
-        LockoutPacketHandler.sync();
-
-
-
-        context.getSource().sendSuccess(Component.literal("Game has been reset"), false);
 
         return 0;
     }

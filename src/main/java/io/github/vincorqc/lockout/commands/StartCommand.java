@@ -11,7 +11,7 @@ import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.concurrent.locks.Lock;
@@ -29,25 +29,19 @@ public class StartCommand implements Command<CommandSourceStack> {
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         if(LockoutGameHandler.getGameStarted() || LockoutGameHandler.getGameWon()) {
-            TextComponent message = new TextComponent("Game is still running, please reset it first");
 
-            Player p = (Player) context.getSource().getEntity();
-            p.sendMessage(message, p.getUUID());
-
+            context.getSource().sendFailure(Component.literal("Game is already running!"));
             return 0;
         }
 
         LockoutGameHandler.setGameStarted(true);
-        LockoutGameHandler.reset();
         LockoutGameHandler.generateGrid();
         LockoutPacketHandler.sync();
-
-        TextComponent message = new TextComponent("Game has Started!");
 
         System.out.println(LockoutGameHandler.asString());
 
         for (Player p : LockoutMod.server.getPlayerList().getPlayers()) {
-            p.sendMessage(message, p.getUUID());
+            p.sendSystemMessage(Component.literal("Game has started!"));
         }
         return 0;
     }

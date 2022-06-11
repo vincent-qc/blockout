@@ -18,6 +18,7 @@ public class BlockList {
                     Blocks.SPRUCE_LEAVES,
                     Blocks.JUNGLE_LEAVES,
                     Blocks.AZALEA_LEAVES,
+                    Blocks.MANGROVE_LEAVES,
                     Blocks.OBSIDIAN,
                     Blocks.BASALT,
                     Blocks.CRYING_OBSIDIAN,
@@ -33,20 +34,24 @@ public class BlockList {
                     Blocks.SEA_PICKLE,
                     Blocks.GILDED_BLACKSTONE,
                     Blocks.MELON,
-                    Blocks.GLOW_LICHEN
+                    Blocks.GLOW_LICHEN,
+                    Blocks.SCULK_CATALYST,
+                    Blocks.SCULK_SHRIEKER
             ))),
 
             Map.entry(TaskDifficulty.HARD, new ArrayList<>(Arrays.asList(
                     Blocks.SPAWNER,
                     Blocks.TURTLE_EGG,
                     Blocks.RED_SAND,
-                    Blocks.COBWEB
+                    Blocks.COBWEB,
+                    Blocks.FROGSPAWN
             ))),
 
             Map.entry(TaskDifficulty.EXPERT, new ArrayList<>(Arrays.asList(
                     Blocks.WET_SPONGE,
                     Blocks.MYCELIUM,
-                    Blocks.CHORUS_FLOWER
+                    Blocks.CHORUS_FLOWER,
+                    Blocks.REINFORCED_DEEPSLATE
             )))
     );
 }

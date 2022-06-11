@@ -11,7 +11,6 @@ import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -34,8 +33,6 @@ public class TeamDisplayCommand implements Command<CommandSourceStack> {
         for(Player p : TeamHandler.getTeamPlayers(team)) {
             str.append(p.getName().getString()).append("\n");
         }
-
-        TextComponent message = new TextComponent(str.toString());
 
         return 0;
     }

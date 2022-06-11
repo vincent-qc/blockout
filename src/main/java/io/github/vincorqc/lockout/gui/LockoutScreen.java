@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class LockoutScreen extends Screen {
@@ -43,7 +42,7 @@ public class LockoutScreen extends Screen {
                 }
 
                 if(isMouseOver(mouseX, mouseY, gridX, gridY, 18, 18)) {
-                    renderTooltip(stack, new TextComponent(grid[r][c].getTitle()), mouseX, mouseY);
+                    renderTooltip(stack, Component.literal(grid[r][c].getTitle()), mouseX, mouseY);
                 }
             }
         }

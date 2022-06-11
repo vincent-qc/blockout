@@ -63,7 +63,9 @@ public class ItemList {
                     Items.DRAGON_BREATH,
                     Items.END_CRYSTAL,
                     Items.ICE,
-                    Items.PACKED_ICE
+                    Items.PACKED_ICE,
+                    Items.ECHO_SHARD,
+                    Items.TADPOLE_BUCKET
             ))),
 
             Map.entry(TaskDifficulty.EXPERT, new ArrayList<>(Arrays.asList(
@@ -74,7 +76,8 @@ public class ItemList {
                     Items.NAME_TAG,
                     Items.WITHER_SKELETON_SKULL,
                     Items.BEE_NEST,
-                    Items.END_ROD
+                    Items.END_ROD,
+                    Items.RECOVERY_COMPASS
             )))
     );
 }

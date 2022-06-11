@@ -30,7 +30,8 @@ public class EffectList {
                     new Tuple<>(MobEffects.BLINDNESS, Items.ENDER_PEARL),
                     new Tuple<>(MobEffects.CONFUSION, Items.PUFFERFISH),
                     new Tuple<>(MobEffects.DAMAGE_RESISTANCE, Items.SCUTE),
-                    new Tuple<>(MobEffects.SATURATION, Items.COOKED_BEEF)
+                    new Tuple<>(MobEffects.SATURATION, Items.COOKED_BEEF),
+                    new Tuple<>(MobEffects.DARKNESS, Items.SCULK)
             )))
     );
 }

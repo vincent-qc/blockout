@@ -50,7 +50,8 @@ public class MobList {
                     new Tuple<>("Slime", Items.SLIME_SPAWN_EGG),
                     new Tuple<>("Polar Bear", Items.POLAR_BEAR_SPAWN_EGG),
                     new Tuple<>("Player", Items.PLAYER_HEAD),
-                    new Tuple<>("Guardian", Items.GUARDIAN_SPAWN_EGG)
+                    new Tuple<>("Guardian", Items.GUARDIAN_SPAWN_EGG),
+                    new Tuple<>("Frog", Items.FROG_SPAWN_EGG)
             ))),
 
             Map.entry(TaskDifficulty.EXPERT, new ArrayList<>(Arrays.asList(
@@ -61,7 +62,9 @@ public class MobList {
                     new Tuple<>("Panda", Items.PANDA_SPAWN_EGG),
                     new Tuple<>("Mule", Items.MULE_SPAWN_EGG),
                     new Tuple<>("Shulker", Items.SHULKER_SPAWN_EGG),
-                    new Tuple<>("Endermite", Items.ENDERMITE_SPAWN_EGG)
+                    new Tuple<>("Endermite", Items.ENDERMITE_SPAWN_EGG),
+                    new Tuple<>("Warden", Items.WARDEN_SPAWN_EGG),
+                    new Tuple<>("Allay", Items.ALLAY_SPAWN_EGG)
             )))
     );
 }
