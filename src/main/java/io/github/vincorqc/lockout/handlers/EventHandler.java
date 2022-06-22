@@ -1,5 +1,6 @@
 package io.github.vincorqc.lockout.handlers;
 
+import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.scores.Team;
@@ -102,6 +103,9 @@ public class EventHandler {
      */
     @SubscribeEvent
     public void playerJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        LockoutMod.LOGGER.info("\n\n\n\nA PLayer has just joined!\n\n\n\n");
+
+
         TeamHandler.addPlayer(event.getPlayer());
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> LockoutGameHandler::reset);
@@ -119,9 +123,4 @@ public class EventHandler {
             LockoutPacketHandler.sync();
         }
     }
-
-
-    /* CLIENT EVENTS */
-
-
 }

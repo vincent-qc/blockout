@@ -59,9 +59,6 @@ public class LockoutMod
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> Keybinds::register);
     }
 
-
-    // Irrelevant but im too scared to remove since the forge docs are sus
-
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
 
