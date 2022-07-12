@@ -6,43 +6,33 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
-import io.github.vincorqc.lockout.handlers.TeamHandler;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
-import net.minecraft.commands.CommandSource;
+import io.github.vincorqc.lockout.networking.packets.ResetPacket;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.concurrent.locks.Lock;
-
-
-public class StartCommand implements Command<CommandSourceStack> {
+public class ResetCommand implements Command<CommandSourceStack> {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("blockoutStart")
+        dispatcher.register(Commands.literal("blockoutReset")
                 .requires(source -> source.hasPermission(3))
-                .executes(new StartCommand())
+                .executes(new ResetCommand())
         );
     }
 
     @Override
     public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        if(LockoutGameHandler.getGameStarted() || LockoutGameHandler.getGameWon()) {
 
-            context.getSource().sendFailure(Component.literal("Game is already running!"));
-            return 0;
-        }
-
-        LockoutGameHandler.setGameStarted(true);
-        LockoutGameHandler.generateGrid();
+        LockoutGameHandler.reset();
+        LockoutPacketHandler.sendAll(new ResetPacket());
         LockoutPacketHandler.sync();
 
-        System.out.println(LockoutGameHandler.asString());
 
-        for (Player p : LockoutMod.server.getPlayerList().getPlayers()) {
-            p.sendSystemMessage(Component.literal("Game has started!"));
-        }
+
+        context.getSource().sendSuccess(Component.literal("Game has been reset"), false);
+
         return 0;
     }
 }

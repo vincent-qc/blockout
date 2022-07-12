@@ -4,7 +4,7 @@ import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.util.Keybinds;
 import io.github.vincorqc.lockout.gui.LockoutScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
@@ -18,7 +18,7 @@ public class ClientHandler {
 
         if(Keybinds.key.isDown()) {
 
-            Minecraft.getInstance().setScreen(new LockoutScreen(new TextComponent("Blockout")));
+            Minecraft.getInstance().setScreen(new LockoutScreen(Component.literal("Blockout")));
         }
     }
 

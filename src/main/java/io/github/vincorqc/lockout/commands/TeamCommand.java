@@ -12,9 +12,7 @@ import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.synchronization.ArgumentTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -44,8 +42,7 @@ public class TeamCommand implements Command<CommandSourceStack> {
         TeamHandler.setTeam(p, team);
 
         String text = team > 0 ? "You have been assigned to Team " + team : "You have been set to no team";
-        TextComponent message = new TextComponent(text);
-        p.sendMessage(message, p.getUUID());
+        p.sendSystemMessage(Component.literal(text));
 
         LockoutPacketHandler.sync();
 

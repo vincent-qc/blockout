@@ -4,8 +4,7 @@ import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import io.github.vincorqc.lockout.networking.packets.TeamPacket;
 import io.github.vincorqc.lockout.networking.packets.TeamScorePacket;
-import net.minecraft.network.chat.ChatType;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -60,10 +59,10 @@ public class TeamHandler {
             teamScores.replace(team, teamScores.get(team) + 1);
             if(teamScores.get(team) > 12) {
                 LockoutGameHandler.setGameStarted(false);
-                TextComponent text = new TextComponent("Team " + team + " won!");
+                LockoutGameHandler.setGameWon(true);
 
                 for(Player p : LockoutMod.server.getPlayerList().getPlayers()) {
-                    p.sendMessage(text, p.getUUID());
+                    p.sendSystemMessage(Component.literal("Team " + team + " won!"));
                     p.playNotifySound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.MASTER, 80, 1);
                 }
             }
@@ -88,9 +87,13 @@ public class TeamHandler {
         teamScores.put(team, score);
     }
 
-    public static void resetScores() {
+    public static void reset() {
         for(int team : teamScores.keySet()) {
             teamScores.replace(team, 0);
+        }
+
+        for(String p : playerTeams.keySet()) {
+            playerTeams.replace(p, 0);
         }
     }
 

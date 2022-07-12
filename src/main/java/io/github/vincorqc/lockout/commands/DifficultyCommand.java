@@ -9,7 +9,7 @@ import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 public class DifficultyCommand implements Command<CommandSourceStack> {
@@ -32,9 +32,7 @@ public class DifficultyCommand implements Command<CommandSourceStack> {
         int expert = IntegerArgumentType.getInteger(context, "expert") + hard;
 
         if(expert != 25) {
-            TextComponent message = new TextComponent("The sum of the rates must be equal to 25");
-            Player p = (Player) context.getSource().getEntity();
-            p.sendMessage(message, p.getUUID());
+            context.getSource().sendFailure(Component.literal("The sum of the rates must be equal to 25"));
             return 0;
         }
 
@@ -45,9 +43,7 @@ public class DifficultyCommand implements Command<CommandSourceStack> {
                 expert
         );
 
-        TextComponent message = new TextComponent("New rates have been assigned");
-        Player p = (Player) context.getSource().getEntity();
-        p.sendMessage(message, p.getUUID());
+        context.getSource().sendSuccess(Component.literal("New rates have been assigned"), false);
 
         LockoutPacketHandler.sync();
         return 0;

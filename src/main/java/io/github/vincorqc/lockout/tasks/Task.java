@@ -5,7 +5,7 @@ import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.handlers.TeamHandler;
 import io.github.vincorqc.lockout.data.TaskDifficulty;
 import io.github.vincorqc.lockout.networking.LockoutPacketHandler;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +27,7 @@ public class Task {
     }
 
     public boolean complete(Player p) {
+
         if (!LockoutGameHandler.getGameStarted()) return false;
         int pTeam = TeamHandler.getTeam(p);
 
@@ -77,10 +78,9 @@ public class Task {
     }
 
     private void sendAnnouncement() {
-        TextComponent text = new TextComponent("Team " + team + " has completed " + title);
 
         for (Player pl : LockoutMod.server.getPlayerList().getPlayers()) {
-            pl.sendMessage(text, pl.getUUID());
+            pl.sendSystemMessage(Component.literal("Team " + team + " has completed " + title));
 
             pl.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.MASTER, 90, 1);
         }

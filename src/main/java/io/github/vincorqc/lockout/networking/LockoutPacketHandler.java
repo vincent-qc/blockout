@@ -3,6 +3,7 @@ package io.github.vincorqc.lockout.networking;
 import io.github.vincorqc.lockout.common.LockoutMod;
 import io.github.vincorqc.lockout.handlers.LockoutGameHandler;
 import io.github.vincorqc.lockout.handlers.TeamHandler;
+import io.github.vincorqc.lockout.networking.packets.ResetPacket;
 import io.github.vincorqc.lockout.networking.packets.TaskPacket;
 import io.github.vincorqc.lockout.networking.packets.TeamPacket;
 import io.github.vincorqc.lockout.networking.packets.TeamScorePacket;
@@ -30,6 +31,7 @@ public class LockoutPacketHandler {
         INSTANCE.registerMessage(id++, TaskPacket.class, TaskPacket::encode, TaskPacket::decode, TaskPacket.Handler::handle);
         INSTANCE.registerMessage(id++, TeamPacket.class, TeamPacket::encode, TeamPacket::decode, TeamPacket.Handler::handle);
         INSTANCE.registerMessage(id++, TeamScorePacket.class, TeamScorePacket::encode, TeamScorePacket::decode, TeamScorePacket.Handler::handle);
+        INSTANCE.registerMessage(id++, ResetPacket.class, ResetPacket::encode, ResetPacket::decode, ResetPacket.Handler::handle);
     }
 
     public static void sendToPlayer(Object msg, Player p) {

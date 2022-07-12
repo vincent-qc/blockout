@@ -14,6 +14,7 @@ import java.util.Random;
 public class LockoutGameHandler {
 
     private static boolean gameStarted = false;
+    private static boolean gameWon = false;
 
 
     private static int defaultEasy = 9;
@@ -63,29 +64,19 @@ public class LockoutGameHandler {
     }
 
     public static void syncTasks() {
-        for(int r = 0; r < 5; r++) {
-            for(int c = 0; c < 5; c++) {
+        for (int r = 0; r < 5; r++) {
+            for (int c = 0; c < 5; c++) {
                 Task t = grid[r][c];
-                if(t == null) continue;
+                if (t == null) continue;
 
                 LockoutPacketHandler.sendAll(new TaskPacket(getType(t), t.getDifficulty(), t.getIndex(), t.getTeam(), r, c));
             }
         }
     }
 
-    public static void setGameStarted(boolean b) {
-        gameStarted = b;
-    }
-
-    public static void setProbability(int easy, int medium, int hard, int expert) {
-        defaultEasy = easy;
-        defaultMedium = medium;
-        defaultHard = hard;
-        defaultExpert = expert;
-    }
-
     public static void reset() {
         grid = new Task[5][5];
+
         obtainTasks.clear();
         advancementTasks.clear();
         killTasks.clear();
@@ -103,11 +94,32 @@ public class LockoutGameHandler {
         hard = defaultHard;
         expert = defaultExpert;
 
-        TeamHandler.resetScores();
+        TeamHandler.reset();
+
+        gameStarted = false;
+        gameWon = false;
+    }
+
+    public static void setProbability(int easy, int medium, int hard, int expert) {
+        defaultEasy = easy;
+        defaultMedium = medium;
+        defaultHard = hard;
+        defaultExpert = expert;
+    }
+
+    public static void setGameStarted(boolean b) {
+        gameStarted = b;
+    }
+
+    public static void setGameWon(boolean b) {
+        gameWon = b;
     }
 
     public static boolean getGameStarted() {
         return gameStarted;
+    }
+    public static boolean getGameWon() {
+        return gameWon;
     }
 
 
@@ -226,9 +238,11 @@ public class LockoutGameHandler {
     public static String asString() {
         StringBuilder res = new StringBuilder();
 
+        res.append("List of Tasks: \n");
+
         for(Task[] r : grid) {
             for(Task t : r) {
-                res.append(t.getTitle());
+                res.append(t.getTitle() + "\n");
             }
         }
 
