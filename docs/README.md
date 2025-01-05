@@ -27,9 +27,6 @@
 
 ---
 
-[![Version](https://img.shields.io/badge/version-1.18.2-red)](https://www.curseforge.com/minecraft/mc-mods/blockout-minigame/files/3800623)
-
-
 An open source lockout mod for Minecraft. Downloads can be found on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/blockout-minigame/files).
 
 # What is Blockout?
