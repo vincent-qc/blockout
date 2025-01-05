@@ -7,6 +7,8 @@
   />
 </div>
 
+<br>
+
 <div align='center'>
 	<img
 	    src="https://img.shields.io/github/license/vincent-qc/blockout?style=for-the-badge"
